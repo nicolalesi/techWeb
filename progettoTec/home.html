@@ -12,14 +12,15 @@
          }
          #titolo{
             align-self: center;
+            margin-top: 1%;
          }
          #containerInfo{
             display:flex;
             justify-content: center;
          }
          #imgAnimale{
-            width: 50%;
-            margin-left: 40px;
+            width: 40%;
+            align-self: center;
          }
          table{
             background-color: aquamarine;
@@ -35,59 +36,16 @@
             color: gray;
          }
     </style>
-    <script>
-
-        function getInfo(){
-			var infoJSON;
-			let request=new XMLHttpRequest();
-			request.open("GET","http://zoo-animal-api.herokuapp.com/animals/rand/");
-			request.send();
-			
-			request.onload=()=>{
-				if(request.status==200){
-					infoJSON=JSON.parse(request.response);
-					console.log(infoJSON);
-					disegnaAnimale(infoJSON);
-				}else
-				{
-					console.log("errore");
-				}
-			}
-		}
-		getInfo();
-
-        function disegnaAnimale(infoJSON){
-
-            console.log(infoJSON.name);
-
-            var p=document.getElementById("informazioni");
-            p.innerHTML=" <b> Nome : </b> "+infoJSON.name;
-            p.innerHTML+="<br/> <b> Nome latino : </b> "+infoJSON.latin_name;
-            p.innerHTML+="<br/> <b> Tipo di animale : </b> "+infoJSON.animal_type;
-            p.innerHTML+="<br/> <b> Momento di attività : </b> "+infoJSON.active_time;
-            p.innerHTML+="<br/> <b> Lunghezza minima : </b>"+infoJSON.length_min+". Lunghezza massima : "+infoJSON.length_max;
-            p.innerHTML+="<br/> <b> Peso minimo : </b> "+infoJSON.weight_min+". Lunghezza massimo : "+infoJSON.weigth_max;
-            p.innerHTML+="<br/> <b> Anni di vita : </b>"+infoJSON.lifespan;
-            p.innerHTML+="<br/> <b> Habitat : </b> "+infoJSON.habitat;
-            p.innerHTML+="<br/> <b> Dieta : </b> "+infoJSON.diet;
-            p.innerHTML+="<br/> <b> Luogo geografico : </b> "+infoJSON.geo_range;
-
-            var img=document.getElementById("imgAnimale");
-            img.setAttribute("src",infoJSON.image_link);
-
-        }
-
-    function refresh(){
-        getInfo();
-    }
-    </script>
     <body>
         <div class="card text-center">
             <div class="card-header">
                 <h3> Animal house</h3>
                 <ul class="nav nav-tabs card-header-tabs " id="navbar">
                     <li class="nav-item">
-                    <a class="nav-link active" href="scopri.html">Scopri nuovi animali</a>
+                        <a class="nav-link active" href="home.html">Home</a>
+                        </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="scopri.html">Scopri nuovi animali</a>
                     </li>
                     <li class="nav-item">
                     <a class="nav-link" href="quiz.html">Quiz</a>
@@ -102,14 +60,13 @@
             </div>    
         </div>
         <div id="container">
-            <h1 id="titolo"> Scopri nuovi animali </h1>
+            <h1 id="titolo"> Benvenuto </h1>
             <div id="containerInfo">
                 <div>
-                    <p id="informazioni"></p>
-                    <input type="button" onclick="refresh()" value="refresh"/>
+                    <p> Scegli tra le opzioni nel menù in alto!</p>
                 </div>
-                <img id="imgAnimale">
             </div>
-        </div>    
+            <img id="imgAnimale" src="saluto.gif" class="img-thumbnail">
+        </div>
     </body>
 </html>

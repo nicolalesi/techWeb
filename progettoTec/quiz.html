@@ -1,0 +1,182 @@
+<html>
+    <head> 
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <title> Info sugli animali </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    </head>
+    <style>
+         #container{
+            display: flex;
+            flex-direction: column;
+         }
+         #titolo{
+            align-self: center;
+         }
+         #containerInfo{
+            display:flex;
+            justify-content: center;
+         }
+         #imgAnimale{
+            width: 30vw;
+            height: 50vh;
+            margin-left: 40px;
+            border-radius: 10px;
+         }
+         #containerRisposte>p{
+            padding:20px;
+            border-radius:10px;
+            background-color: lightgray;
+         }
+         #containerRisposte>p:hover{
+            background-color: gray;
+            cursor:pointer;
+         }
+         h3{
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+         }
+         p{
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+         }
+    </style>
+    <script>
+
+        function getInfo(){
+			var infoJSON;
+			let request=new XMLHttpRequest();
+			request.open("GET","http://zoo-animal-api.herokuapp.com/animals/rand/");
+			request.send();
+			
+			request.onload=()=>{
+				if(request.status==200){
+					infoJSON=JSON.parse(request.response);
+					console.log(infoJSON);
+					disegnaAnimale(infoJSON);
+                    getCities(infoJSON.geo_range);
+				}else
+				{
+					console.log("errore");
+				}
+			}
+
+		}
+		getInfo();
+
+        function getCities(country){
+            var infoJSON;
+            let request=new XMLHttpRequest();
+			request.open("GET","https://restcountries.com/v3.1/all");
+			request.send();
+			
+			request.onload=()=>{
+				if(request.status==200){
+					infoJSON=JSON.parse(request.response);
+					console.log(infoJSON);
+					writeCity(infoJSON,country);
+				}else
+				{
+					console.log("errore");
+				}
+			}
+        }
+
+        var solutions;
+        var randomPlace;
+        function writeCity(infoJSON,country){
+
+            randomPlace=["first","second","third"];
+            var randomPosition=Math.floor(Math.random()*3);
+            solutions=["false","false","false"];
+            console.log(randomPosition);
+            console.log(country);
+
+            var pTrue=document.getElementById(randomPlace[randomPosition]);
+            pTrue.innerHTML=country;
+            pTrue.setAttribute("value","true");
+            solutions[randomPosition]="true";
+
+            for(let i=0;i<randomPlace.length;i++){
+                if(i!=randomPosition){
+                    var randomCountries=Math.floor(Math.random() * 250);
+                    var pFalse=document.getElementById(randomPlace[i]);
+                    pFalse.innerHTML=infoJSON[randomCountries].name.common;
+                    pFalse.setAttribute("value","false");
+                }
+            }
+        }
+
+        function disegnaAnimale(infoJSON){
+
+            console.log(infoJSON.name);
+
+            var p=document.getElementById("informazioni");
+            p.innerHTML=" <b> Nome : </b> "+infoJSON.name;
+
+            var img=document.getElementById("imgAnimale");
+            img.setAttribute("src",infoJSON.image_link);
+
+        }
+
+        function refresh(){
+            getInfo();
+            for(let i=0;i<solutions.length;i++){
+                    document.getElementById(randomPlace[i]).style.backgroundColor="white";
+            }
+        }
+
+        function quizResults(){
+
+            console.log("random Place"+randomPlace);
+            for(let i=0;i<solutions.length;i++){
+                if(solutions[i]=="true"){
+                    document.getElementById(randomPlace[i]).style.backgroundColor="#90EE90";
+                }
+                else
+                    document.getElementById(randomPlace[i]).style.backgroundColor="#FF6347";
+            }
+
+        }
+    </script>
+    <body>
+        <div class="card text-center">
+            <div class="card-header">
+                <h3> Animal house</h3>
+                <ul class="nav nav-tabs card-header-tabs " id="navbar">
+                    <li class="nav-item">
+                    <a class="nav-link" href="scopri.html">Scopri nuovi animali</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link active" href="quiz.html">Quiz</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="curiosita.html">Curiosità</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="funFacts.html" tabindex="-1" aria-disabled="true">Funny and cutie images</a>
+                    </li>
+                </ul>
+            </div>    
+        </div>
+        <div id="container">
+            <div id="titolo">
+                <h3 class="mt-5"> Indovina il luogo geografico </h3>
+                <p> Indovina da quale posto del mondo provengono gli animali che ti verranno proposti.</p>
+            </div>    
+            <div id="containerInfo" class="mt-5">
+
+                <div>
+                    <div>
+                        <p id="informazioni"></p>
+                    </div>
+                    <div id="containerRisposte">
+                        <h3> Indovina habitat </h3>
+                        <p id="first" value="" onclick="quizResults(id)"></p>
+                        <p id="second" value="" onclick="quizResults(id)"></p>
+                        <p id="third"  value="" onclick="quizResults(id)"></p>
+                    </div>
+                    <input type="button" onclick="refresh()" value="Nuova domanda" class="btn btn-primary mt-3"/>
+                </div> 
+                <img id="imgAnimale" class="img-thumbnail">
+            </div>
+        </div>    
+    </body>
+</html>

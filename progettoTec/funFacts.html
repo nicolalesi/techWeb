@@ -1,0 +1,96 @@
+<html>
+    <head> 
+        <title> Info sugli animali </title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <title> Info sugli animali </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    </head>
+    <style>
+         #container{
+            display: flex;
+            flex-direction: column;
+         }
+         #titolo{
+            align-self: center;
+         }
+         #containerInfo{
+            display:flex;
+            justify-content: center;
+         }
+         #imgAnimale{
+            width: 35vw;
+            height: 50vh;
+            margin-left: 40px;
+         }
+    </style>
+    <script>
+
+        function getInfo(){
+			var infoJSON;
+			let request=new XMLHttpRequest();
+			request.open("GET","https://random.dog/woof.json");
+			request.send();
+			
+			request.onload=()=>{
+				if(request.status==200){
+					infoJSON=JSON.parse(request.response);
+					console.log(infoJSON);
+					disegnaAnimale(infoJSON);
+				}else
+				{
+					console.log("errore");
+				}
+			}
+		}
+		getInfo();
+
+        function disegnaAnimale(infoJSON){
+
+            console.log(infoJSON.name);
+
+            var img=document.getElementById("imgAnimale");
+            img.setAttribute("src",infoJSON.url);
+
+        }
+
+    function refresh(){
+        getInfo();
+    }
+    </script>
+    <body>
+        <div class="card text-center">
+            <div class="card-header">
+                <h3> Animal house</h3>
+                <ul class="nav nav-tabs card-header-tabs " id="navbar">
+                    <li class="nav-item">
+                    <a class="nav-link" href="scopri.html">Scopri nuovi animali</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="quiz.html">Quiz</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="curiosita.html">Curiosità</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link active" href="funFacts.html" tabindex="-1" aria-disabled="true">Funny and cutie images</a>
+                    </li>
+                </ul>
+            </div>    
+        </div>
+        <div id="container" class="mt-5 text-center">
+            <div id="containerInfo">
+                <div>
+                    <p id="informazioni"></p>
+                </div>
+                <div class="d-flex flex-column bd-highlight mr-5" style="align-self: center;">
+                    <img id="imgAnimale" class="img-thumbnail">
+                    <input type="button" onclick="refresh()" value="Nuova foto" class="mt-5 btn btn-primary width" style="margin-left: 36px;"/>
+                </div>
+                <div class="d-flex flex-column bd-highlight mb-3 mr-5">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/1AuvM5LtDM8" style="margin-bottom: 10px;"></iframe>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/I972RfiAuXk"></iframe>
+                </div>
+            </div>
+        </div>    
+    </body>
+</html>

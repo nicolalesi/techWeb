@@ -1,0 +1,132 @@
+<html>
+    <head> 
+        <title> Info sugli animali </title>
+        <title> Info sugli animali </title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <title> Info sugli animali </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    </head>
+    <style>
+        #container{
+           display: flex;
+           flex-direction: column;
+        }
+        #titolo{
+           align-self: center;
+        }
+        #containerInfo{
+           display:flex;
+           justify-content: center;
+        }
+        table{
+           background-color: aquamarine;
+           padding : 20px;
+           font-size: 20px;
+           text-align: center;
+           border-radius: 10px;
+        }
+        th{
+           border-right: 1px solid black;
+        }
+        th:hover{
+           color: gray;
+        }
+        #imgAnimale{
+            width: 30vw;
+            height: 50vh;
+            margin-left: 40px;
+         }
+   </style>
+    <!--https://www.dogfactsapi.ducnguyen.dev/api/v1/facts/?number=5-->
+    <script>
+
+        function getPhoto(){
+			var infoJSON;
+			let request=new XMLHttpRequest();
+			request.open("GET","https://dog.ceo/api/breeds/image/random");
+			request.send();
+			
+			request.onload=()=>{
+				if(request.status==200){
+					infoJSON=JSON.parse(request.response);
+					console.log(infoJSON);
+					disegnaAnimale(infoJSON);
+				}else
+				{
+					console.log("errore");
+				}
+			}
+		}
+		getPhoto();
+
+        function getInfo(){
+            var infoJSON;
+			let request=new XMLHttpRequest();
+			request.open("GET","https://www.dogfactsapi.ducnguyen.dev/api/v1/facts/?number=5");
+			request.send();
+			
+			request.onload=()=>{
+				if(request.status==200){
+					infoJSON=JSON.parse(request.response);
+					console.log(infoJSON);
+					scriviInfo(infoJSON);
+				}else
+				{
+					console.log("errore");
+				}
+			}
+
+        }
+
+        getInfo();
+
+        function scriviInfo(infoJSON){
+            var p=document.getElementById("informazioni");
+            p.innerHTML=infoJSON.facts[0];
+        }
+
+        function disegnaAnimale(infoJSON){
+
+        console.log(infoJSON.name);
+
+        var img=document.getElementById("imgAnimale");
+        img.setAttribute("src",infoJSON.message);
+
+        }
+
+        function refresh(){
+            getPhoto();
+            getInfo();
+        }
+    </script>    
+    <body>
+        <div class="card text-center">
+            <div class="card-header">
+                <h3> Animal house</h3>
+                <ul class="nav nav-tabs card-header-tabs " id="navbar">
+                    <li class="nav-item">
+                    <a class="nav-link" href="scopri.html">Scopri nuovi animali</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="quiz.html">Quiz</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link active" href="curiosita.html">Curiosità</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="funFacts.html" tabindex="-1" aria-disabled="true">Funny and cutie images</a>
+                    </li>
+                </ul>
+            </div>    
+        </div>
+        <div id="container">
+            <div id="containerInfo" class="mt-5">
+                <div class="ml-5">
+                    <p id="informazioni"> </p>
+                    <input type="button" onclick="refresh()" value="Nuova curiosità" class="btn btn-primary"/>
+                </div>
+                <img id="imgAnimale" class="img-thumbnail mr-5">
+            </div>
+        </div>    
+    </body>
+</html>

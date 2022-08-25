@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+    <head> 
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <title> Info sugli animali </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    </head>
+    <style>
+        #container{
+            display: flex;
+            flex-direction: column;
+        }
+        #titolo{
+            align-self: center;
+            margin-top: 1%;
+        }
+        #containerInfo{
+            display:flex;
+            justify-content: center;
+        }
+         #imgAnimale{
+            width: 40%;
+            align-self: center;
+         }
+         .divider:after,
+         .divider:before {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #eee;
+            }
+        .h-custom {
+            height: calc(100% - 73px);
+            }
+        @media (max-width: 450px) {
+        .h-custom {
+            height: 100%;
+            }
+            }
+        #register{
+            display: none;
+        }  
+        a {
+           cursor: pointer;
+        }  
+    </style>
+    <script>
+        function registerForm(){
+            document.getElementById("register").style.display="block";
+            document.getElementById("formIscrizione").style.display="none";
+        }
+
+        function loginForm(){
+            document.getElementById("register").style.display="none";
+            document.getElementById("formIscrizione").style.display="block";   
+        }
+    </script>
+    <body>
+        <div class="card text-center">
+            <div class="card-header">
+                <h3> Animal house</h3>
+                <ul class="nav nav-tabs card-header-tabs " id="navbar">
+                    <li class="nav-item">
+                    <a class="nav-link" href="home.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="scopri.html">Scopri nuovi animali</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="quiz.html">Quiz</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="curiosita.html">Curiosità</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="funFacts.html" tabindex="-1" aria-disabled="true">Funny and cutie images</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link active" href="login.html" tabindex="-1" aria-disabled="true">Login</a>
+                    </li>
+                </ul>
+            </div>    
+        </div>
+        <div id="container">
+            <div id="formIscrizione">
+                <section class="vh-100">
+                    <div class="container-fluid h-custom">
+                      <div class="row d-flex justify-content-center align-items-center h-100">
+                        <div class="col-md-9 col-lg-6 col-xl-5">
+                          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+                            class="img-fluid" alt="Sample image">
+                        </div>
+                        <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+                          <form>
+                            <!-- Email input -->
+                            <div class="form-outline mb-4">
+                              <input type="email" id="form3Example3" class="form-control form-control-lg"
+                                placeholder="Enter a valid email address" />
+                              <label class="form-label" for="form3Example3">Email address</label>
+                            </div>
+                  
+                            <!-- Password input -->
+                            <div class="form-outline mb-3">
+                              <input type="password" id="form3Example4" class="form-control form-control-lg"
+                                placeholder="Enter password" />
+                              <label class="form-label" for="form3Example4">Password</label>
+                            </div>
+                  
+                            <div class="d-flex justify-content-between align-items-center">
+                              <!-- Checkbox -->
+                              <div class="form-check mb-0">
+                                <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
+                                <label class="form-check-label" for="form2Example3">
+                                  Remember me
+                                </label>
+                              </div>
+                              <a href="#!" class="text-body">Forgot password?</a>
+                            </div>
+                  
+                            <div class="text-center text-lg-start mt-4 pt-2">
+                              <button type="button" class="btn btn-primary btn-lg"
+                                style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
+                              <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a onclick="registerForm()"
+                                  class="link-danger">Register</a></p>
+                            </div>
+                  
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+            </div>
+            <!-- Section: Design Block -->
+<section class="text-center text-lg-start" id="register">
+    <style>
+      .cascading-right {
+        margin-right: -50px;
+      }
+  
+      @media (max-width: 991.98px) {
+        .cascading-right {
+          margin-right: 0;
+        }
+      }
+    </style>
+  
+    <!-- Jumbotron -->
+    <div class="container py-4">
+      <div class="row g-0 align-items-center">
+        <div class="col-lg-6 mb-5 mb-lg-0">
+          <div class="card cascading-right" style="
+              background: hsla(0, 0%, 100%, 0.55);
+              backdrop-filter: blur(30px);
+              ">
+            <div class="card-body p-5 shadow-5 text-center">
+              <h2 class="fw-bold mb-5">Sign up now</h2>
+              <form>
+                <!-- 2 column grid layout with text inputs for the first and last names -->
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                      <input type="text" id="form3Example1" class="form-control" />
+                      <label class="form-label" for="form3Example1">First name</label>
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                      <input type="text" id="form3Example2" class="form-control" />
+                      <label class="form-label" for="form3Example2">Last name</label>
+                    </div>
+                  </div>
+                </div>
+  
+                <!-- Email input -->
+                <div class="form-outline mb-4">
+                  <input type="email" id="form3Example3" class="form-control" />
+                  <label class="form-label" for="form3Example3">Email address</label>
+                </div>
+  
+                <!-- Password input -->
+                <div class="form-outline mb-4">
+                  <input type="password" id="form3Example4" class="form-control" />
+                  <label class="form-label" for="form3Example4">Password</label>
+                </div>
+  
+  
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-primary btn-block mb-4">
+                  Sign up
+                </button>
+                <a onclick="loginForm()"> Torna a login </a>
+              </form>
+            </div>
+          </div>
+        </div>
+  
+        <div class="col-lg-6 mb-5 mb-lg-0">
+          <img src="https://mdbootstrap.com/img/new/ecommerce/vertical/004.jpg" class="w-100 rounded-4 shadow-4"
+            alt="" />
+        </div>
+      </div>
+    </div>
+    <!-- Jumbotron -->
+  </section>
+  <!-- Section: Design Block -->
+    </body>
+</html>

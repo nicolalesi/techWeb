@@ -54,6 +54,10 @@
             document.getElementById("register").style.display="none";
             document.getElementById("formIscrizione").style.display="block";   
         }
+
+        function logged(){
+
+        }
     </script>
     <body>
         <div class="card text-center">
@@ -77,6 +81,9 @@
                     </li>
                     <li class="nav-item">
                     <a class="nav-link active" href="login.html" tabindex="-1" aria-disabled="true">Login</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="areaPersonale.html" tabindex="-1" aria-disabled="true">Area personale</a>
                     </li>
                 </ul>
             </div>    
@@ -119,7 +126,7 @@
                   
                             <div class="text-center text-lg-start mt-4 pt-2">
                               <button type="button" class="btn btn-primary btn-lg"
-                                style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
+                                style="padding-left: 2.5rem; padding-right: 2.5rem;" onclick="logged()">Login</button>
                               <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a onclick="registerForm()"
                                   class="link-danger">Register</a></p>
                             </div>
@@ -154,7 +161,7 @@
               ">
             <div class="card-body p-5 shadow-5 text-center">
               <h2 class="fw-bold mb-5">Sign up now</h2>
-              <form>
+              <form action="./signLog/addUser.php" method="post">
                 <!-- 2 column grid layout with text inputs for the first and last names -->
                 <div class="row">
                   <div class="col-md-6 mb-4">
@@ -173,14 +180,14 @@
   
                 <!-- Email input -->
                 <div class="form-outline mb-4">
-                  <input type="email" id="form3Example3" class="form-control" />
-                  <label class="form-label" for="form3Example3">Email address</label>
+                  <input type="email" id="email" class="form-control" name="email"/>
+                  <label class="form-label" for="email">Email address</label>
                 </div>
   
                 <!-- Password input -->
                 <div class="form-outline mb-4">
-                  <input type="password" id="form3Example4" class="form-control" />
-                  <label class="form-label" for="form3Example4">Password</label>
+                  <input type="password" id="password" class="form-control" name="password"/>
+                  <label class="form-label" for="password">Password</label>
                 </div>
   
   

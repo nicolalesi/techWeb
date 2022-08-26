@@ -91,7 +91,7 @@
 
             var pTrue=document.getElementById(randomPlace[randomPosition]);
             pTrue.innerHTML=country;
-            pTrue.setAttribute("value","true");
+            pTrue.value="true";
             solutions[randomPosition]="true";
 
             for(let i=0;i<randomPlace.length;i++){
@@ -99,7 +99,7 @@
                     var randomCountries=Math.floor(Math.random() * 250);
                     var pFalse=document.getElementById(randomPlace[i]);
                     pFalse.innerHTML=infoJSON[randomCountries].name.common;
-                    pFalse.setAttribute("value","false");
+                    pFalse.value="false";
                 }
             }
         }
@@ -123,7 +123,16 @@
             }
         }
 
-        function quizResults(){
+        //dovrebbe averne una ciascun utente
+        var punteggio=0;
+        function quizResults(id){
+            
+
+            if(document.getElementById(id).value=="true"){
+                punteggio++;
+            }
+
+            console.log("Punteggio attuale "+ punteggio);
 
             console.log("random Place"+randomPlace);
             for(let i=0;i<solutions.length;i++){

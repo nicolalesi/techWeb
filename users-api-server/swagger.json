@@ -1,0 +1,92 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "0.0.1",
+    "title": "API for project",
+    "description": "description",
+    "termsOfService": "terms",
+    "license": {
+      "name": "MIT",
+      "url": "http://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "login.swagger.io",
+  "basePath": "/v2/apiLoginAndRegistration",
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "definitions": {
+    "User": {
+      "type": "object",
+      "required": [
+        "id",
+        "nomeUtente",
+        "password"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "nomeUtente": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "paths": {
+    "/user/": {
+      "get": {
+        "operationId": "getUser",
+        "parameters": [
+          {
+            "name": "nomeUtente",
+            "type": "string",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "Failed"
+          }
+        }
+      }
+    },
+    "/user/{nomeUtente}{password}/": {
+      "post": {
+        "operationId": "addUser",
+        "parameters": [
+          {
+            "name": "nomeUtente",
+            "in": "path",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "password",
+            "in": "path",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successo"
+          },
+          "400": {
+            "description": "Failed"
+          }
+        }
+      }
+    }
+  }
+}

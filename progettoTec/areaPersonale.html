@@ -1,9 +1,44 @@
 <html>
     <head> 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <title> Info sugli animali </title>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     </head>
+    <script>
+
+        function logout(){
+            document.cookie="null";
+            window.location.replace("home.html");
+        }
+
+        if(document.cookie){
+        console.log("Il cookie da questa pagina "+document.cookie);
+
+        var settings = {
+                    "url": "http://localhost:3000/utenti/"+document.cookie,
+                    "method": "GET",
+                    "timeout": 0,
+                    };
+
+                    $.ajax(settings).done(function (response) {
+
+                    infoResponse=response;
+                    console.log(infoResponse);
+
+                    document.getElementById("nome").innerHTML=infoResponse.nome;
+                    document.getElementById("cognome").innerHTML=infoResponse.cognome;
+                    document.getElementById("nomeUtente").innerHTML=infoResponse.email;
+                    document.getElementById("punteggio").innerHTML=infoResponse.punteggio;
+
+                    });
+                }
+    </script>
+    <style>
+        th{
+            color: blue;
+        }
+    </style>
     <body>
         <div class="card text-center">
             <div class="card-header">
@@ -25,23 +60,29 @@
                     <a class="nav-link" href="funFacts.html" tabindex="-1" aria-disabled="true">Funny and cutie images</a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link" href="login.html" tabindex="-1" aria-disabled="true">Login</a>
-                    </li>
-                    <li class="nav-item">
                       <a class="nav-link active" href="areaPersonale.html" tabindex="-1" aria-disabled="true">Area personale</a>
                     </li>
                 </ul>
             </div>    
         </div>
 
-        <table>
-            <th>
-                <td> Username </td>
-                <td> Punteggio Quiz </td>
-            </th>
-            <tr>
-                <td> Admin</td>
-                <td id="punteggio"> 5</td>
-            </tr>
-        </table>
+        <div>
+            <table class="table">
+                <thead class="table-primary">
+                    <th> Username </td>
+                    <th> Nome</td>
+                    <th> Cognome</td>
+                    <th> Punteggio Quiz </td>
+                </thead>
+                <tr>
+                    <td id="nomeUtente"> Admin</td>
+                    <td id="nome"> Nome </td>
+                    <td id="cognome">Cognome </td>
+                    <td id="punteggio"> 5</td>
+                </tr>
+            </table>
+            <button onclick="logout()" class="btn btn-primary">
+                Logout
+            </button>
+        </div>
 </html>

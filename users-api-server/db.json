@@ -1,0 +1,68 @@
+{
+  "utenti": [
+    {
+      "email": "elena@medori.it",
+      "id": "2"
+    },
+    {
+      "email": "elena@moscardi.it",
+      "id": "3",
+      "password": "Ciaoatutti"
+    },
+    {
+      "email": "nic",
+      "id": "4uWDhBs",
+      "password": {}
+    },
+    {
+      "utente": {
+        "nome": "a",
+        "cognome": "a",
+        "email": "nic",
+        "password": "Ciao"
+      },
+      "id": "pTBIMEb"
+    },
+    {
+      "email": "nicol@alesi.it",
+      "password": "Ciaoatutti",
+      "nome": "Nicol",
+      "cognome": "Alesi",
+      "punteggio": 2,
+      "id": "X7p_SiP"
+    },
+    {
+      "email": {},
+      "id": "MaQ_hS9",
+      "password": {},
+      "nome": {},
+      "cognome": {}
+    },
+    {
+      "punteggio": 1,
+      "id": "XD-u7j8"
+    },
+    {
+      "email": "luca@porfiri.me",
+      "id": "-PbGQ6I",
+      "password": "Ciaoatutti",
+      "nome": "Luca",
+      "cognome": "Porfiri"
+    },
+    {
+      "email": "jessica@rabbit.it",
+      "id": "3YE4wVg",
+      "password": "Ciaoatutti",
+      "nome": "Jessica",
+      "cognome": "Rabbit"
+    },
+    {
+      "email": "gionny@stecchino.it",
+      "password": "Ciaoatutti",
+      "nome": "Gionny",
+      "cognome": "Stecchino",
+      "punteggio": 1,
+      "id": "KHr3vWe"
+    }
+  ]
+}

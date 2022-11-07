@@ -43,9 +43,12 @@
                     <li class="nav-item">
                     <a class="nav-link" href="funFacts.html" tabindex="-1" aria-disabled="true">Funny and cutie images</a>
                     </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="login.html" tabindex="-1" aria-disabled="true">Login</a>
+                    <li class="nav-item" id="login">
+                    <a class="nav-link" href="login.html" tabindex="-1" aria-disabled="true" >Login</a>
                     </li>
+                    <li class="nav-item" id="areaPersonale">
+                    <a class="nav-link" href="areaPersonale.html" tabindex="-1" aria-disabled="true">Area personale</a>
+                  </li>
                 </ul>
             </div>    
         </div>
@@ -59,4 +62,16 @@
             <img id="imgAnimale" src="saluto.gif" class="img-thumbnail">
         </div>
     </body>
+    <script>
+        if(document.cookie!="null"){
+            document.getElementById("login").style.display="none";
+            document.getElementById("areaPersonale").style.display="block";
+        }
+        else
+        if(!document.cookie || document.cookie=="null")
+        {
+            document.getElementById("login").style.display="block";
+            document.getElementById("areaPersonale").style.display="none";
+        }
+    </script>
 </html>

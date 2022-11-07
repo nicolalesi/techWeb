@@ -3,6 +3,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <title> Info sugli animali </title>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     </head>
     <style>
          #container{
@@ -134,6 +135,45 @@
 
             console.log("Punteggio attuale "+ punteggio);
 
+
+            if(document.cookie){
+
+                    var settings = {
+                    "url": "http://localhost:3000/utenti/"+document.cookie,
+                    "method": "GET",
+                    "timeout": 0,
+                    };
+
+                    $.ajax(settings).done(function (response) {
+
+                    infoResponse=response;
+                    console.log(infoResponse);
+
+                    console.log("Aggiorno il punteggio di "+document.cookie);
+                    var settings = {
+                    "url": "http://localhost:3000/utenti/"+document.cookie,
+                    "method": "PUT",
+                    "timeout": 0,
+                    "headers": {
+                    "Content-Type": "application/json"
+                    },
+                    "data": JSON.stringify({
+                    "email": infoResponse.email,
+                    "password": infoResponse.password,
+                    "nome": infoResponse.nome,
+                    "cognome":infoResponse.cognome,
+                    "punteggio":punteggio
+                    }),
+            };
+
+            $.ajax(settings).done(function (response) {
+                console.log(response);
+            });
+
+                    });
+
+            }
+
             console.log("random Place"+randomPlace);
             for(let i=0;i<solutions.length;i++){
                 if(solutions[i]=="true"){
@@ -165,6 +205,12 @@
                     <li class="nav-item">
                     <a class="nav-link" href="funFacts.html" tabindex="-1" aria-disabled="true">Funny and cutie images</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html" tabindex="-1" aria-disabled="true" id="login">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="areaPersonale.html" tabindex="-1" aria-disabled="true" id="areaPersonale">Area personale</a>
+                      </li>
                 </ul>
             </div>    
         </div>
@@ -192,3 +238,15 @@
         </div>    
     </body>
 </html>
+<script>
+    if(document.cookie!="null"){
+        document.getElementById("login").style.display="none";
+        document.getElementById("areaPersonale").style.display="block";
+    }
+    else
+    if(!document.cookie || document.cookie=="null")
+    {
+        document.getElementById("login").style.display="block";
+        document.getElementById("areaPersonale").style.display="none";
+    }
+</script>

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head> 
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <title> Info sugli animali </title>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     </head>
@@ -56,8 +57,116 @@
         }
 
         function logged(){
+          var nomeUtente;
+          var password;
+
+          var infoResponse=null;
+
+          nomeUtente=document.getElementById("emailLogin").value;
+          password=document.getElementById("passwordLogin").value;
+          console.log(nomeUtente);
+          console.log(password);
+
+      
+          var settings = {
+          "url": "http://localhost:3000/utenti?email="+nomeUtente,
+          "method": "GET",
+          "timeout": 0,
+        };
+
+        $.ajax(settings).done(function (response) {
+
+          var login=false;
+          infoResponse=response;
+          console.log(infoResponse);
+
+          if(infoResponse[0]){
+            {
+              console.log("L'utente esiste");
+              if(infoResponse[0].password==password){
+                console.log("Puoi accedere");
+                document.cookie=infoResponse[0].id;
+                console.log("Cookie salvato "+document.cookie);
+                window.location.replace("areaPersonale.html");
+              }
+              else{
+                console.log("Password errata ");
+                window.alert("Password errata");
+              }
+            }
+          }
+          else
+          {
+            window.alert("L'utente non esiste");
+          }
+        
+        });
+
+
+        return false;
+        }
+
+
+        function registration(){
+          var nome;
+          var cognome;
+          var email;
+          var password;
+
+          var flag;
+
+          nome=document.getElementById("nome").value;
+          cognome=document.getElementById("cognome").value;
+          email=document.getElementById("email").value;
+          password=document.getElementById("password").value;
+      
+          var settings = {
+          "url": "http://localhost:3000/utenti?email="+email,
+          "method": "GET",
+          "timeout": 0,
+        };
+
+        $.ajax(settings).done(function (response) {
+
+          infoResponse=response;
+          console.log(infoResponse);
+
+          if(infoResponse[0]){
+            {
+              console.log("L'utente esiste");
+              window.alert("Esiste già un utente con questa mail");
+              return;
+            }
+          }
+          else
+          {
+            console.log("Puoi registrarti");
+            var settings = {
+            "url": "http://localhost:3000/utenti",
+            "method": "POST",
+            "timeout": 0,
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "data": JSON.stringify({
+              "email": email,
+              "id": "",
+              "password": password,
+              "nome":nome,
+              "cognome":cognome
+            }),
+          };
+
+          $.ajax(settings).done(function (response) {
+            console.log(response);
+            window.alert("Ti sei registrato ora puoi effettuare il login con questo account");
+            window.location.replace("login.html");
+          });
+          }
+        });
 
         }
+
     </script>
     <body>
         <div class="card text-center">
@@ -98,18 +207,18 @@
                             class="img-fluid" alt="Sample image">
                         </div>
                         <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-                          <form>
+                          <div>
                             <!-- Email input -->
                             <div class="form-outline mb-4">
-                              <input type="email" id="form3Example3" class="form-control form-control-lg"
-                                placeholder="Enter a valid email address" />
+                              <input type="email" id="emailLogin" class="form-control form-control-lg"
+                                placeholder="Enter a valid email address" name="emailLogin"/>
                               <label class="form-label" for="form3Example3">Email address</label>
                             </div>
                   
                             <!-- Password input -->
                             <div class="form-outline mb-3">
-                              <input type="password" id="form3Example4" class="form-control form-control-lg"
-                                placeholder="Enter password" />
+                              <input type="password" id="passwordLogin" class="form-control form-control-lg"
+                                placeholder="Enter password" name="passwordLogin" />
                               <label class="form-label" for="form3Example4">Password</label>
                             </div>
                   
@@ -125,31 +234,32 @@
                             </div>
                   
                             <div class="text-center text-lg-start mt-4 pt-2">
-                              <button type="button" class="btn btn-primary btn-lg"
+                              <button class="btn btn-primary btn-lg"
                                 style="padding-left: 2.5rem; padding-right: 2.5rem;" onclick="logged()">Login</button>
                               <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a onclick="registerForm()"
                                   class="link-danger">Register</a></p>
                             </div>
                   
-                          </form>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </section>
             </div>
-            <!-- Section: Design Block -->
-<section class="text-center text-lg-start" id="register">
-    <style>
-      .cascading-right {
-        margin-right: -50px;
-      }
-  
-      @media (max-width: 991.98px) {
-        .cascading-right {
-          margin-right: 0;
-        }
-      }
-    </style>
+
+        <!-- Section: Design Block -->
+        <section class="text-center text-lg-start" id="register">
+            <style>
+              .cascading-right {
+                margin-right: -50px;
+              }
+          
+              @media (max-width: 991.98px) {
+                .cascading-right {
+                  margin-right: 0;
+                }
+              }
+            </style>
   
     <!-- Jumbotron -->
     <div class="container py-4">
@@ -160,19 +270,19 @@
               backdrop-filter: blur(30px);
               ">
             <div class="card-body p-5 shadow-5 text-center">
-              <h2 class="fw-bold mb-5">Sign up now</h2>
-              <form action="./signLog/addUser.php" method="post">
+              <h2 class="fw-bold mb-5 ">Sign up now</h2>
+              <div class="registrazione" >
                 <!-- 2 column grid layout with text inputs for the first and last names -->
                 <div class="row">
                   <div class="col-md-6 mb-4">
                     <div class="form-outline">
-                      <input type="text" id="form3Example1" class="form-control" />
+                      <input type="text" id="nome" name="nome" class="form-control" />
                       <label class="form-label" for="form3Example1">First name</label>
                     </div>
                   </div>
                   <div class="col-md-6 mb-4">
                     <div class="form-outline">
-                      <input type="text" id="form3Example2" class="form-control" />
+                      <input type="text" id="cognome" name="cognome" class="form-control" />
                       <label class="form-label" for="form3Example2">Last name</label>
                     </div>
                   </div>
@@ -192,15 +302,14 @@
   
   
                 <!-- Submit button -->
-                <button type="submit" class="btn btn-primary btn-block mb-4">
+                <input type="submit" class="btn btn-primary btn-block mb-4" onclick="registration()">
                   Sign up
                 </button>
                 <a onclick="loginForm()"> Torna a login </a>
-              </form>
+              </div>
             </div>
           </div>
         </div>
-  
         <div class="col-lg-6 mb-5 mb-lg-0">
           <img src="https://mdbootstrap.com/img/new/ecommerce/vertical/004.jpg" class="w-100 rounded-4 shadow-4"
             alt="" />

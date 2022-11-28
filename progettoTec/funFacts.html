@@ -83,6 +83,9 @@
                     <li class="nav-item" id="areaPersonale">
                     <a class="nav-link" href="areaPersonale.html" tabindex="-1" aria-disabled="true">Area personale</a>
                   </li>
+                  <li class="nav-item" id="bacheca">
+                    <a class="nav-link" href="bacheca.html" tabindex="-1" aria-disabled="true">Bacheca</a>    
+                    </li>
                 </ul>
             </div>    
         </div>
@@ -103,14 +106,26 @@
     </body>
 </html>
 <script>
-    if(document.cookie!="null"){
-        document.getElementById("login").style.display="none";
-        document.getElementById("areaPersonale").style.display="block";
+    console.log(document.cookie);
+    var test=document.cookie;
+    console.log(test);
+    if(document.cookie){
+
+        if(document.cookie=="null"){
+            document.getElementById("login").style.display="block";
+            document.getElementById("areaPersonale").style.display="none";
+        }
+        else {
+            document.getElementById("login").style.display="none";
+            document.getElementById("areaPersonale").style.display="block";
+        }
     }
-    else
-    if(!document.cookie || document.cookie=="null")
-    {
+    else{
         document.getElementById("login").style.display="block";
         document.getElementById("areaPersonale").style.display="none";
     }
+
+    /*document.getElementById("login").style.display="block";
+    document.getElementById("areaPersonale").style.display="block";*/
+
 </script>

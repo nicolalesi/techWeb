@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> 
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <title> Info sugli animali </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    </head>
+    <style>
+        #container{
+            display: flex;
+            flex-direction: column;
+        }
+        #titolo{
+            align-self: center;
+            margin-top: 1%;
+        }
+        #containerInfo{
+            display:flex;
+            justify-content: center;
+        }
+        #imgAnimale{
+            width: 40%;
+            align-self: center;
+        }
+        #containerInfo{
+            padding: 20px;
+        }
+        #fotoBacheca{
+            width: 100%;
+        }
+        #divPost{
+            border: 3px dotted;
+            padding: 20px;
+            max-width: 200px;
+            border-radius: 10px;
+        }
+        #aneddoti{
+            display: none;
+        }
+        #partner{
+            display: none;
+        }
+        #aiutatemi{
+            display: none;
+        }
+        #titleHelp{
+            font-weight: bold;
+        }
+    </style>
+    <body>
+        <div class="card text-center">
+            <div class="card-header">
+                <h3> Animal house</h3>
+                <ul class="nav nav-tabs card-header-tabs " id="navbar">
+                    <li class="nav-item">
+                    <a class="nav-link" href="home.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="scopri.html">Scopri nuovi animali</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="quiz.html">Quiz</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="curiosita.html">Curiosità</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="funFacts.html" tabindex="-1" aria-disabled="true">Funny and cutie images</a>
+                    </li>
+                    <li class="nav-item" id="login">
+                    <a class="nav-link" href="login.html" tabindex="-1" aria-disabled="true" >Login</a>
+                    </li>
+                    <li class="nav-item" id="areaPersonale">
+                    <a class="nav-link" href="areaPersonale.html" tabindex="-1" aria-disabled="true">Area personale</a>
+                    </li>
+                    <li class="nav-item" id="bacheca">
+                    <a class="nav-link active" href="bacheca.html" tabindex="-1" aria-disabled="true">Bacheca</a>    
+                    </li>
+                </ul>
+            </div>    
+        </div>
+        <div id="container">
+            <div>
+                <p> Quale bacheca vuoi visitare ? </p>
+                <input type="button" value="Aneddoti" onclick="showBacheca('aneddoti')"/>
+                <input type="button" value="Cerco partner" onclick="showBacheca('partner')"/>
+                <input type="button" value="Aiutatemi" onclick="showBacheca('aiutatemi')"/>
+            </div>
+            <div id="aneddoti">
+                <h1 id="titolo"> Bacheca aneddoti ed immagini </h1>
+                <div id="divAggiuntaPost">
+                    <h3 id="loggato" style="color:red"></h3>
+                    <p id="email"> Email : </p>
+                    <input id="addAneddoto" type="text" placeholder="Inserisci aneddoto"> </input>
+                    <input id="addUri"type="text" placeholder="Inserisci uri immagine"> </input>
+                    <input id="inviaPost" type="button" onclick="sendPost()" value="Invia post"/>
+                </div>
+                <div id="containerInfo">
+                </div>
+            </div>
+            <div id="partner">
+                <p> Partner</p>
+            </div>
+            <div id="aiutatemi">
+                <p> Aiutatemi</p>
+            </div>
+        </div>
+    </body>
+    </html>
+    <script>
+
+    var infoResponse;
+
+        if(document.cookie=="null" || !document.cookie){
+            console.log("Non sei loggato");
+            document.getElementById("loggato").innerHTML="Non sei loggato non potrai aggiungere post";
+            document.getElementById("inviaPost").disabled=true;
+
+            document.getElementById("login").style.display="block";
+            document.getElementById("areaPersonale").style.display="none";
+        }
+        else
+        {
+            document.getElementById("loggato").innerHTML="Aggiungi un post alla bacheca";
+            document.getElementById("login").style.display="none";
+            document.getElementById("areaPersonale").style.display="block";
+        }
+
+        function showBacheca(value){
+            document.getElementById(value).style.display="block";
+            
+            if(value!="aneddoti")
+                document.getElementById("aneddoti").style.display="none";
+            if(value!="partner")
+                document.getElementById("partner").style.display="none"; 
+            if(value!="aiutatemi")
+                document.getElementById("aiutatemi").style.display="none";
+                
+            if(value=="aneddoti")
+                infoBacheca();
+            if(value=="partner")
+                console.log("Partner");
+            if(value=="aiutatemi")
+               bachecaAiutatemi();
+        }
+
+        function infoBacheca(){
+        
+        console.log("Il cookie da questa pagina "+document.cookie);
+
+        var infoResponse;
+
+        var settings = {
+                    "url": "http://localhost:3000/bacheca/",
+                    "method": "GET",
+                    "timeout": 0,
+                    };
+
+                    $.ajax(settings).done(function (response) {
+
+                    infoResponse=response;
+                    console.log(infoResponse);
+                    console.log(infoResponse[0]);
+
+                    var div=document.getElementById("containerInfo");
+
+                    for(let i=0;i<infoResponse.length;i++){
+                        var nome=infoResponse[i].email;
+                        var aneddoto=infoResponse[i].aneddoto;
+                        var immagine=infoResponse[i].immagine;
+
+                        var divPost= document.createElement("div");
+                        var pEmail=document.createElement("p");
+                        var pAneddoto=document.createElement("p");
+                        var pImage=document.createElement("img");
+
+                        pEmail.innerHTML=nome;
+                        pAneddoto.innerHTML=aneddoto;
+                        pImage.src=immagine;
+                        pImage.id="fotoBacheca";
+                        divPost.id="divPost";
+
+                        divPost.appendChild(pEmail);
+                        divPost.appendChild(pAneddoto);
+                        divPost.appendChild(pImage);
+
+                        div.appendChild(divPost);
+                    }
+
+                    });
+
+      
+        }
+
+
+        function sendPost(){
+
+        var email;
+        var aneddoto= document.getElementById("addAneddoto").value;
+        var immagine= document.getElementById("addUri").value;
+
+        if(document.cookie && document.cookie!="undefined"){
+        console.log("Il cookie da questa pagina "+document.cookie);
+
+        var settings = {
+                    "url": "http://localhost:3000/utenti/"+document.cookie,
+                    "method": "GET",
+                    "timeout": 0,
+                    };
+
+                    $.ajax(settings).done(function (response) {
+
+                    infoResponse=response;
+                    console.log(infoResponse.email);
+                    //console.log(infoResponse[0].email);
+                    document.getElementById("email").innerHTML+=infoResponse.email;
+                    email=infoResponse.email;
+                    //console.log(infoResponse[0].email);
+
+                    var aggiuntaPost= {
+                    "url": "http://localhost:3000/bacheca/",
+                    "method": "POST",
+                    "timeout": 0,
+                    "headers": {
+                    "Content-Type": "application/json"
+                    },
+                    "data": JSON.stringify({
+                    "email": email,
+                    "aneddoto": aneddoto,
+                    "immagine": immagine,
+                    "id":""
+                    }),
+                };         
+
+                    $.ajax(aggiuntaPost).done(function (response) {
+
+                    infoResponse=response;
+                    console.log(infoResponse);
+                    window.location.reload();
+                            }) 
+                    }) 
+           
+                }
+
+        }
+
+        function messageTo(indice){
+
+        console.log(document.cookie);
+        console.log(infoResponse[indice].email);
+
+        if(!document.cookie || document.cookie=="null")
+            window.alert("Non sei loggato non puoi inviare messaggi");
+        else{    
+        var messaggio=document.getElementById("textForMessageTo").value;
+
+        if(!messaggio)
+            window.alert("Non hai inserito nulla");
+        else{
+        var settings = {
+                "url": "http://localhost:3000/utenti/"+document.cookie,
+                "method": "GET",
+                "timeout": 0,
+                };
+
+                $.ajax(settings).done(function (response) {
+
+                console.log(response);
+
+                var settings = {
+                "url": "http://localhost:3000/messaggio/",
+                "method": "POST",
+                "timeout": 0,
+                "headers": {
+                "Content-Type": "application/json"
+                },
+                "data": JSON.stringify({
+                "mittente": response.email,
+                "messaggio": messaggio,
+                "destinatario":infoResponse[indice].email,
+                "id": "",
+                }),
+            };
+
+            $.ajax(settings).done(function (response) {
+                console.log(response);
+            });
+                });
+
+            }
+        }
+        }
+
+        function bachecaAiutatemi(){
+
+        var settings = {
+                    "url": "http://localhost:3000/bachecaAiuto/",
+                    "method": "GET",
+                    "timeout": 0,
+                    };
+
+                    $.ajax(settings).done(function (response) {
+
+                    infoResponse=response;
+                    console.log(infoResponse);
+                    console.log(infoResponse[0]);
+
+                    var div=document.getElementById("aiutatemi");
+
+                    for(let i=0;i<infoResponse.length;i++){
+                        var nome=infoResponse[i].email;
+                        var aiuto=infoResponse[i].aiuto;
+                        var titolo=infoResponse[i].titolo;
+
+                        var divPost= document.createElement("div");
+                        divPost.id="divPost";
+
+                        var pEmail=document.createElement("p");
+                        var pAiuto=document.createElement("p");
+                        var pTitolo=document.createElement("p");
+                        var inviaMessaggio=document.createElement("input");
+                        var testoMessaggio=document.createElement("input");
+
+                        pEmail.innerHTML=nome;
+                        pAiuto.innerHTML=aiuto;
+                        pTitolo.innerHTML=titolo;
+                        pTitolo.id="titleHelp";
+                        inviaMessaggio.type="button";
+                        inviaMessaggio.value="Scrivimi";
+                        inviaMessaggio.addEventListener("click", function(){messageTo(i);}); 
+                        testoMessaggio.type="text";
+                        testoMessaggio.placeholder="Inserisci testo messaggio";
+                        testoMessaggio.id="textForMessageTo";
+                        
+
+                        divPost.appendChild(pTitolo);
+                        divPost.appendChild(pEmail);
+                        divPost.appendChild(pAiuto);
+                        divPost.appendChild(testoMessaggio);
+                        divPost.appendChild(inviaMessaggio);
+
+                        div.appendChild(divPost);
+                    }
+
+                    });
+
+      
+        }
+
+
+    </script>

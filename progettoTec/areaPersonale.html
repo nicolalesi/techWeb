@@ -5,7 +5,19 @@
         <title> Info sugli animali </title>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     </head>
+    <style>
+        #divMessaggio{
+            border-top: 3px;
+            border-style: solid;
+        }
+    </style>
     <script>
+
+        /*if(!document.cookie){
+            console.log("Non sei loggato");
+            window.alert("Non sei loggato");
+            window.location.replace("login.html");
+        } */   
 
         function logout(){
             document.cookie="null";
@@ -30,9 +42,42 @@
                     document.getElementById("cognome").innerHTML=infoResponse.cognome;
                     document.getElementById("nomeUtente").innerHTML=infoResponse.email;
                     document.getElementById("punteggio").innerHTML=infoResponse.punteggio;
+                    
+                    console.log(document.getElementById("nomeUtente").innerHTML);
+
+                    var settings = {
+                    "url": "http://localhost:3000/messaggio?destinatario="+document.getElementById("nomeUtente").innerHTML,
+                    "method": "GET",
+                    "timeout": 0,
+                    };
+
+                    $.ajax(settings).done(function (response) {
+
+                    var divPosta=document.getElementById("casellaPosta");
+                    for(let i=0;i<response.length;i++){
+                        
+                        var divMessaggio=document.createElement("div");
+                        var pMittente=document.createElement("p");
+                        var pMessaggio=document.createElement("p");
+
+                        divMessaggio.id="divMessaggio";
+                        pMittente.innerHTML=response[i].mittente;
+                        pMessaggio.innerHTML=response[i].messaggio;
+
+                        divMessaggio.appendChild(pMittente);
+                        divMessaggio.appendChild(pMessaggio);
+
+                        divPosta.appendChild(divMessaggio);
+
+                    }
 
                     });
+                    });
+
+
                 }
+
+        
     </script>
     <style>
         th{
@@ -62,6 +107,9 @@
                     <li class="nav-item">
                       <a class="nav-link active" href="areaPersonale.html" tabindex="-1" aria-disabled="true">Area personale</a>
                     </li>
+                    <li class="nav-item" id="bacheca">
+                        <a class="nav-link" href="bacheca.html" tabindex="-1" aria-disabled="true">Bacheca</a>    
+                    </li>
                 </ul>
             </div>    
         </div>
@@ -81,8 +129,13 @@
                     <td id="punteggio"> 5</td>
                 </tr>
             </table>
+            <div id="casellaPosta">
+                <h3> La tua casella di posta</h3>
+            </div>
             <button onclick="logout()" class="btn btn-primary">
                 Logout
             </button>
+            <a href="cambiaPassword.html"> Cambia password </a>
+            <a href="eliminaAccount.html"> Elimina il mio account </a>
         </div>
 </html>

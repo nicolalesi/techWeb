@@ -1,60 +1,20 @@
 {
   "utenti": [
     {
-      "email": "elena@medori.it",
-      "id": "2"
-    },
-    {
-      "email": "elena@moscardi.it",
-      "id": "3",
-      "password": "Ciaoatutti"
-    },
-    {
-      "email": "nic",
-      "id": "4uWDhBs",
-      "password": {}
-    },
-    {
-      "utente": {
-        "nome": "a",
-        "cognome": "a",
-        "email": "nic",
-        "password": "Ciao"
-      },
-      "id": "pTBIMEb"
-    },
-    {
-      "email": "nicol@alesi.it",
-      "password": "Ciaoatutti",
-      "nome": "Nicol",
-      "cognome": "Alesi",
-      "punteggio": 2,
-      "id": "X7p_SiP"
-    },
-    {
-      "email": {},
-      "id": "MaQ_hS9",
-      "password": {},
-      "nome": {},
-      "cognome": {}
-    },
-    {
-      "punteggio": 1,
-      "id": "XD-u7j8"
-    },
-    {
       "email": "luca@porfiri.me",
-      "id": "-PbGQ6I",
-      "password": "Ciaoatutti",
+      "password": "Caccola",
       "nome": "Luca",
-      "cognome": "Porfiri"
+      "cognome": "Porfiri",
+      "punteggio": 10,
+      "id": "-PbGQ6I"
     },
     {
       "email": "jessica@rabbit.it",
       "id": "3YE4wVg",
       "password": "Ciaoatutti",
       "nome": "Jessica",
-      "cognome": "Rabbit"
+      "cognome": "Rabbit",
+      "punteggio": 0
     },
     {
       "email": "gionny@stecchino.it",
@@ -63,6 +23,144 @@
       "cognome": "Stecchino",
       "punteggio": 1,
       "id": "KHr3vWe"
+    },
+    {
+      "email": "nicol@alesi.it",
+      "password": "Ciaoatutti",
+      "nome": "Nicol",
+      "cognome": "Alesi",
+      "id": "FltHxTM",
+      "punteggio": 0
+    }
+  ],
+  "bacheca": [
+    {
+      "email": "gionny@stecchino.it",
+      "aneddoto": "Ciao a tutti",
+      "immagine": "https://i0.wp.com/notiziescientifiche.it/wp-content/uploads/2019/09/uro-Bos-primigenius.jpg?resize=1030%2C438&ssl=1",
+      "id": 1
+    },
+    {
+      "email": "nicol@alesi.it",
+      "aneddoto": "I pokémon sono come gli animali",
+      "immagine": "https://media.pokemoncentral.it/wiki/b/b5/Pok%C3%A9mon_accompagnatore_LGPE_artwork.png",
+      "id": 2
+    },
+    {
+      "email": "nicol@alesi.it",
+      "aneddoto": "Il mio cane è simpatico",
+      "immagine": "https://media.istockphoto.com/id/1213516345/it/foto/pazzo-dallaspetto-bianco-e-nero-bordo-collie-cane-dire-guardando-intensamente-su-sfondo-giallo.jpg?s=612x612&w=is&k=20&c=W8bbhdIM1DdnnEUrMR8c7QvaUXAQj6IQw1OZTb0_ilc=",
+      "id": 3
+    },
+    {
+      "email": "nicol@alesi.it",
+      "aneddoto": "Gatto domestico",
+      "immagine": "https://upload.wikimedia.org/wikipedia/commons/9/9e/Ginger_european_cat.jpg",
+      "id": 4
+    }
+  ],
+  "bachecaAiuto": [
+    {
+      "email": "gionny@stecchino.it",
+      "titolo": "Cane malato",
+      "aiuto": "Ciao a tutti, il mio cane sta male avrei bisogno di aiuto contattatemi",
+      "id": 1
+    },
+    {
+      "email": "nicol@alesi.it",
+      "titolo": "Offro servizio",
+      "aiuto": "Offro servizio veterinario, aiutatemi a cercare lavoro",
+      "immagine": "https://media.pokemoncentral.it/wiki/b/b5/Pok%C3%A9mon_accompagnatore_LGPE_artwork.png",
+      "id": 2
+    }
+  ],
+  "bachecaPartner": [
+    {
+      "email": "gionny@stecchino.it",
+      "titolo": "Cerco partner",
+      "aiuto": "Ambulatorio veterinario cerca canile partner",
+      "id": 1
+    },
+    {
+      "email": "nicol@alesi.it",
+      "titolo": "Cerco sponsor",
+      "aiuto": "Cerco sponsor per gara ad ostacoli",
+      "immagine": "https://media.pokemoncentral.it/wiki/b/b5/Pok%C3%A9mon_accompagnatore_LGPE_artwork.png",
+      "id": 2
+    }
+  ],
+  "messaggio": [
+    {
+      "mittente": "gionny@stecchino.it",
+      "messaggio": "Ciao ti scrivo per aiutarti",
+      "destinatario": "nicol@alesi.it",
+      "id": 1
+    },
+    {
+      "mittente": "luca@porfiri.it",
+      "messaggio": "Ciao ti posso aiutare",
+      "destinatario": "nicol@alesi.it",
+      "id": 8
+    },
+    {
+      "mittente": "nicol@alesi.it",
+      "messaggio": "Ciao di cosa avresti bisogno?",
+      "destinatario": "nicol@alesi.it",
+      "id": 9
+    },
+    {
+      "mittente": "nicol@alesi.it",
+      "messaggio": "Perché io potrei aiutarti",
+      "destinatario": "nicol@alesi.it",
+      "id": 10
+    },
+    {
+      "mittente": "nicol@alesi.it",
+      "messaggio": "Ufa",
+      "destinatario": "nicol@alesi.it",
+      "id": 11
+    },
+    {
+      "mittente": "nicol@alesi.it",
+      "messaggio": "Ciacia",
+      "destinatario": "nicol@alesi.it",
+      "id": 12
+    },
+    {
+      "mittente": "nicol@alesi.it",
+      "messaggio": "lll",
+      "destinatario": "nicol@alesi.it",
+      "id": 13
+    },
+    {
+      "mittente": "nicol@alesi.it",
+      "messaggio": "Per gionni",
+      "destinatario": "nicol@alesi.it",
+      "id": 14
+    },
+    {
+      "mittente": "nicol@alesi.it",
+      "messaggio": "l",
+      "destinatario": 0,
+      "id": 15
+    },
+    {
+      "mittente": "nicol@alesi.it",
+      "messaggio": "l",
+      "destinatario": 1,
+      "id": 16
+    },
+    {
+      "mittente": "nicol@alesi.it",
+      "messaggio": "fsa",
+      "destinatario": {},
+      "id": 17
+    },
+    {
+      "mittente": "nicol@alesi.it",
+      "messaggio": "Con ilriso",
+      "destinatario": "gionny@stecchino.it",
+      "id": 18
     }
   ]
 }

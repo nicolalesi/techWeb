@@ -2,6 +2,7 @@
 <html>
     <head> 
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+      <script type="text/javascript" src="C:\Users\niky0\OneDrive\Documenti\GitHub\techWeb\q-master\q.js"></script>
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <title> Info sugli animali </title>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -67,7 +68,54 @@
           console.log(nomeUtente);
           console.log(password);
 
-      
+
+			/*let request=new XMLHttpRequest();
+			request.open("GET","http://localhost:3000/utenti?email="+nomeUtente);
+			request.send();
+			
+      var infoJSON;
+
+	  request.onload=()=>{
+
+				if(request.status==200){
+					infoJSON=JSON.parse(request.response);
+					console.log(infoJSON);
+          console.log(infoJSON[0].email +"Email");
+
+          var login=false;
+
+          infoResponse=infoJSON;
+          console.log(infoResponse);
+          console.log(infoResponse.email);
+          if(infoResponse[0]){
+            {
+              console.log("L'utente esiste");
+              if(infoResponse[0].password==password){
+
+                console.log("Puoi accedere");
+                //document.cookie=infoResponse[0].id;
+                var id= Q.defer();
+                id=infoResponse[0].id;
+                id.resolve;
+                console.log("Cookie salvato "+document.cookie);
+                window.alert("Hai effettuato correttamente il login");
+                document.location.href="AreaPersonale.html";
+              }
+              else{
+                console.log("Password errata ");
+                window.alert("Password errata");
+              }
+            }
+          }
+
+  
+
+				}else
+          {
+            window.alert("L'utente non esiste");
+          }
+			}*/
+
           var settings = {
           "url": "http://localhost:3000/utenti?email="+nomeUtente,
           "method": "GET",
@@ -85,9 +133,12 @@
               console.log("L'utente esiste");
               if(infoResponse[0].password==password){
                 console.log("Puoi accedere");
+
+
                 document.cookie=infoResponse[0].id;
                 console.log("Cookie salvato "+document.cookie);
-                window.location.replace("areaPersonale.html");
+                window.alert("Hai effettuato correttamente il login");
+                document.location.href="AreaPersonale.html";
               }
               else{
                 console.log("Password errata ");
@@ -153,7 +204,8 @@
               "id": "",
               "password": password,
               "nome":nome,
-              "cognome":cognome
+              "cognome":cognome,
+              "punteggio":0
             }),
           };
 
@@ -191,6 +243,9 @@
                     <li class="nav-item">
                     <a class="nav-link active" href="login.html" tabindex="-1" aria-disabled="true">Login</a>
                     </li>
+                    <li class="nav-item" id="bacheca">
+                    <a class="nav-link" href="bacheca.html" tabindex="-1" aria-disabled="true">Bacheca</a>    
+                    </li>
                 </ul>
             </div>    
         </div>
@@ -227,7 +282,7 @@
                                   Remember me
                                 </label>
                               </div>
-                              <a href="#!" class="text-body">Forgot password?</a>
+                              <a href="forgotPassword.html" class="text-body">Forgot password?</a>
                             </div>
                   
                             <div class="text-center text-lg-start mt-4 pt-2">

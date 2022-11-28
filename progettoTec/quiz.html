@@ -6,9 +6,14 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     </head>
     <style>
-         #container{
+         #containerQuiz{
             display: flex;
             flex-direction: column;
+            flex:70%
+         }
+         #container{
+            display: flex;
+            flex-direction: row;
          }
          #titolo{
             align-self: center;
@@ -37,6 +42,9 @@
          }
          p{
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+         }
+         #leaderboard{
+            margin-right: 30px;
          }
     </style>
     <script>
@@ -125,18 +133,10 @@
         }
 
         //dovrebbe averne una ciascun utente
-        var punteggio=0;
+        var punteggio;
         function quizResults(id){
             
-
-            if(document.getElementById(id).value=="true"){
-                punteggio++;
-            }
-
-            console.log("Punteggio attuale "+ punteggio);
-
-
-            if(document.cookie){
+            if(document.cookie && document.getElementById(id).value=="true" ){
 
                     var settings = {
                     "url": "http://localhost:3000/utenti/"+document.cookie,
@@ -148,6 +148,10 @@
 
                     infoResponse=response;
                     console.log(infoResponse);
+                    console.log(infoResponse.punteggio+ "Punteggio");
+
+                    punteggio=infoResponse.punteggio+1;
+
 
                     console.log("Aggiorno il punteggio di "+document.cookie);
                     var settings = {
@@ -164,6 +168,8 @@
                     "cognome":infoResponse.cognome,
                     "punteggio":punteggio
                     }),
+
+                    
             };
 
             $.ajax(settings).done(function (response) {
@@ -182,7 +188,6 @@
                 else
                     document.getElementById(randomPlace[i]).style.backgroundColor="#FF6347";
             }
-
         }
     </script>
     <body>
@@ -209,44 +214,121 @@
                         <a class="nav-link" href="login.html" tabindex="-1" aria-disabled="true" id="login">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="areaPersonale.html" tabindex="-1" aria-disabled="true" id="areaPersonale">Area personale</a>
-                      </li>
+                   <a class="nav-link" href="areaPersonale.html" tabindex="-1" aria-disabled="true" id="areaPersonale">Area personale</a>
+                   </li>
+                   <li class="nav-item" id="bacheca">
+                    <a class="nav-link" href="bacheca.html" tabindex="-1" aria-disabled="true">Bacheca</a>    
+                    </li>  
                 </ul>
             </div>    
         </div>
         <div id="container">
-            <div id="titolo">
-                <h3 class="mt-5"> Indovina il luogo geografico </h3>
-                <p> Indovina da quale posto del mondo provengono gli animali che ti verranno proposti.</p>
-            </div>    
-            <div id="containerInfo" class="mt-5">
+            <div id="containerQuiz">
+                <div id="titolo">
+                    <h3 class="mt-5"> Indovina il luogo geografico </h3>
+                    <p> Indovina da quale posto del mondo provengono gli animali che ti verranno proposti.</p>
+                </div>    
+                <div id="containerInfo" class="mt-5">
 
-                <div>
                     <div>
-                        <p id="informazioni"></p>
-                    </div>
-                    <div id="containerRisposte">
-                        <h3> Indovina habitat </h3>
-                        <p id="first" value="" onclick="quizResults(id)"></p>
-                        <p id="second" value="" onclick="quizResults(id)"></p>
-                        <p id="third"  value="" onclick="quizResults(id)"></p>
-                    </div>
-                    <input type="button" onclick="refresh()" value="Nuova domanda" class="btn btn-primary mt-3"/>
-                </div> 
-                <img id="imgAnimale" class="img-thumbnail">
+                        <div>
+                            <p id="informazioni"></p>
+                        </div>
+                        <div id="containerRisposte">
+                            <h3> Indovina habitat </h3>
+                            <p id="first" value="" onclick="quizResults(id)"></p>
+                            <p id="second" value="" onclick="quizResults(id)"></p>
+                            <p id="third"  value="" onclick="quizResults(id)"></p>
+                        </div>
+                        <input type="button" onclick="refresh()" value="Nuova domanda" class="btn btn-primary mt-3"/>
+                    </div> 
+                    <img id="imgAnimale" class="img-thumbnail">
+                </div>
             </div>
-        </div>    
+            <div id="leaderBoard">
+                <h1> LeaderBoard</h1>
+            </div>
+        </div>
     </body>
 </html>
 <script>
-    if(document.cookie!="null"){
-        document.getElementById("login").style.display="none";
-        document.getElementById("areaPersonale").style.display="block";
-    }
-    else
-    if(!document.cookie || document.cookie=="null")
-    {
-        document.getElementById("login").style.display="block";
-        document.getElementById("areaPersonale").style.display="none";
-    }
+        console.log(document.cookie);
+        var test=document.cookie;
+        console.log(test);
+        if(document.cookie){
+
+            if(document.cookie=="null"){
+                document.getElementById("login").style.display="block";
+                document.getElementById("areaPersonale").style.display="none";
+            }
+            else {
+                document.getElementById("login").style.display="none";
+                document.getElementById("areaPersonale").style.display="block";
+            }
+        }
+        else{
+            document.getElementById("login").style.display="block";
+            document.getElementById("areaPersonale").style.display="none";
+        }
+
+        /*document.getElementById("login").style.display="block";
+        document.getElementById("areaPersonale").style.display="block";*/
+
+
+
+        console.log("Il cookie da questa pagina "+document.cookie);
+
+        var settings = {
+                    "url": "http://localhost:3000/utenti/",
+                    "method": "GET",
+                    "timeout": 0,
+                    };
+
+                    $.ajax(settings).done(function (response) {
+
+                    infoResponse=response;
+                    console.log(infoResponse);
+
+                    var div=document.getElementById("leaderBoard");
+                    var divPunteggio= document.createElement("table");
+
+                    var primaRiga=document.createElement("tr");
+                    var email=document.createElement("th");
+                    var punteggio=document.createElement("th");
+
+                    email.innerHTML="Email ";
+                    punteggio.innerHTML="Punteggio ";
+
+                    primaRiga.appendChild(email);
+                    primaRiga.appendChild(punteggio);
+                    divPunteggio.appendChild(primaRiga);
+
+
+                    for(let i=0;i<infoResponse.length;i++){
+                        var email=infoResponse[i].email;
+                        var punteggio=infoResponse[i].punteggio;
+                        var arrayUtenti=[];
+
+                        if(punteggio!=undefined){
+                            var riga=document.createElement("tr");
+                            
+                            var pEmail=document.createElement("td");
+                            var pPunteggio=document.createElement("td");
+
+                            pEmail.innerHTML=email;
+                            pPunteggio.innerHTML=punteggio;
+
+                            riga.appendChild(pEmail);
+                            riga.appendChild(pPunteggio);
+
+                            divPunteggio.appendChild(riga);
+
+                            div.appendChild(divPunteggio);
+                        }
+                    }
+
+                    console.log(arrayUtenti);
+
+                    });
+                
 </script>

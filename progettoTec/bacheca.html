@@ -14,29 +14,52 @@
         #titolo{
             align-self: center;
             margin-top: 1%;
+            font-weight: bold;
+            font-family: Helvetica, Arial, sans-serif;
         }
         #containerInfo{
             display:flex;
             justify-content: center;
+            flex-direction: column;
+            width:100% ;
         }
         #imgAnimale{
             width: 40%;
-            align-self: center;
+            height: 30%;
+            border-radius: 20px;
         }
         #containerInfo{
             padding: 20px;
+            flex-direction: column-reverse;
+            
         }
         #fotoBacheca{
-            width: 100%;
+            width: 10%;
         }
         #divPost{
-            border: 3px dotted;
+            border: 3px block;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+            max-height: 250;
+            border-radius: 20px;
+            margin-top: 30px;
             padding: 20px;
-            max-width: 200px;
-            border-radius: 10px;
+        }
+        #divHelpPost{
+            border: 3px block;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            max-height: 250;
+            border-radius: 20px;
+            margin-top: 30px;
+            padding: 20px;
         }
         #aneddoti{
             display: none;
+            display: flex;
+            flex-direction: column;
         }
         #partner{
             display: none;
@@ -46,6 +69,48 @@
         }
         #titleHelp{
             font-weight: bold;
+        }
+        .miPiace{
+            width: 50px;
+            height: 50px;
+            align-self: flex-end;
+            margin-left: 55%;
+        }
+        #pId{
+            padding: 20px;
+            background-color: deepskyblue;
+            width: 100%;
+            color: whitesmoke;
+            font-weight: bold;
+            border-radius: 20px;
+        }
+        #pAneddoto{
+            padding: 20px;
+            width: 100%;
+            flex: 80%;
+        }
+        #containerButtons{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #loggato {
+            align-self: center;
+            font-size: 15px;
+        }
+        #divAggiuntaPost{
+            display: flex;
+            flex-direction: column;
+            margin:10px
+        }
+        #email{
+            display: none;
+        }
+        #formAggiunta{
+            padding: 20px;
+        }
+        .divTesto{
+            display: flex;
         }
     </style>
     <body>
@@ -81,29 +146,30 @@
             </div>    
         </div>
         <div id="container">
-            <div>
+            <div id="containerButtons">
                 <p> Quale bacheca vuoi visitare ? </p>
-                <input type="button" value="Aneddoti" onclick="showBacheca('aneddoti')"/>
-                <input type="button" value="Cerco partner" onclick="showBacheca('partner')"/>
-                <input type="button" value="Aiutatemi" onclick="showBacheca('aiutatemi')"/>
+                <div>
+                    <input type="button" value="Aneddoti" onclick="showBacheca('aneddoti')" class="btn btn-primary"/>
+                    <input type="button" value="Cerco partner" onclick="showBacheca('partner')" class="btn btn-secondary"/>
+                    <input type="button" value="Aiutatemi" onclick="showBacheca('aiutatemi')" class="btn btn-success"/>
+                </div>
             </div>
             <div id="aneddoti">
-                <h1 id="titolo"> Bacheca aneddoti ed immagini </h1>
-                <div id="divAggiuntaPost">
-                    <h3 id="loggato" style="color:red"></h3>
-                    <p id="email"> Email : </p>
-                    <input id="addAneddoto" type="text" placeholder="Inserisci aneddoto"> </input>
-                    <input id="addUri"type="text" placeholder="Inserisci uri immagine"> </input>
-                    <input id="inviaPost" type="button" onclick="sendPost()" value="Invia post"/>
+                <div id="divAggiuntaPost" >
+                    <h3 id="loggato"></h3>
+                    <div class="form-group" id="formAggiunta">
+                        <p id="email"> Email : </p>
+                        <input id="addAneddoto" type="text" placeholder="Inserisci aneddoto" class="form-control"> </input>
+                        <input id="addUri"type="text" placeholder="Inserisci uri immagine" class="form-control" style="margin-top: 10px;"> </input>
+                        <input id="inviaPost" type="button" onclick="sendPost()" value="Invia post" class="btn btn-primary" style="margin-top: 10px; "/>
+                    </div>    
                 </div>
-                <div id="containerInfo">
+                <div id="containerInfo" >
                 </div>
             </div>
             <div id="partner">
-                <p> Partner</p>
             </div>
             <div id="aiutatemi">
-                <p> Aiutatemi</p>
             </div>
         </div>
     </body>
@@ -112,9 +178,12 @@
 
     var infoResponse;
 
+        getEmail();
+
+
         if(document.cookie=="null" || !document.cookie){
             console.log("Non sei loggato");
-            document.getElementById("loggato").innerHTML="Non sei loggato non potrai aggiungere post";
+            document.getElementById("loggato").innerHTML="Non sei loggato non potrai aggiungere nè visualizzare post";
             document.getElementById("inviaPost").disabled=true;
 
             document.getElementById("login").style.display="block";
@@ -137,12 +206,6 @@
             if(value!="aiutatemi")
                 document.getElementById("aiutatemi").style.display="none";
                 
-            if(value=="aneddoti")
-                infoBacheca();
-            if(value=="partner")
-                console.log("Partner");
-            if(value=="aiutatemi")
-               bachecaAiutatemi();
         }
 
         function infoBacheca(){
@@ -160,30 +223,59 @@
                     $.ajax(settings).done(function (response) {
 
                     infoResponse=response;
-                    console.log(infoResponse);
-                    console.log(infoResponse[0]);
 
                     var div=document.getElementById("containerInfo");
+
+                    var clicked;
 
                     for(let i=0;i<infoResponse.length;i++){
                         var nome=infoResponse[i].email;
                         var aneddoto=infoResponse[i].aneddoto;
                         var immagine=infoResponse[i].immagine;
+                        var id=infoResponse[i].id;
 
                         var divPost= document.createElement("div");
                         var pEmail=document.createElement("p");
                         var pAneddoto=document.createElement("p");
                         var pImage=document.createElement("img");
+                        var miPiace=document.createElement("img");
 
+                        divPost.classList.add("border");
+                        divPost.classList.add("border-primary");
                         pEmail.innerHTML=nome;
+                        pEmail.id="pId";
+                        pAneddoto.id="pAneddoto";
                         pAneddoto.innerHTML=aneddoto;
                         pImage.src=immagine;
-                        pImage.id="fotoBacheca";
+                        pImage.id="imgAnimale";
+                        miPiace.id="miPiace"+i;
+                        miPiace.classList.add("miPiace");
+                        if(findId(userResponse.preferiti,id)){
+                            miPiace.src="cuoreMiPiace.png";
+                            miPiace.value="true";
+                            clicked=true;
+                        }
+                        else{
+                            miPiace.src="miPiace.png";
+                            miPiace.value="false";
+                            clicked=false;
+                        }
+
                         divPost.id="divPost";
+                        miPiace.addEventListener("click", function(){
+                            if(clicked){
+                                miPiace.src="miPiace.png";
+                            }
+                            else
+                            {
+                                miPiace.src="cuoreMiPiace.png";
+                            }
+                            addLike(infoResponse,i)}); 
 
                         divPost.appendChild(pEmail);
                         divPost.appendChild(pAneddoto);
                         divPost.appendChild(pImage);
+                        divPost.appendChild(miPiace);
 
                         div.appendChild(divPost);
                     }
@@ -193,10 +285,117 @@
       
         }
 
+        function findId(preferiti,id){
+            for(let i=0;i<preferiti.length;i++){
+                if(preferiti[i]==id)
+                    return true;
+            }
+
+            return false;
+        }
+
+        function addLike(risposta,indice){
+
+            console.log("Ciao aggiungo ai like ");
+            var preferiti=userResponse.preferiti;
+                    
+            console.log( document.getElementById("miPiace"+indice).value);
+            console.log(indice);
+            
+            if(document.getElementById("miPiace"+indice).value=="false" || !document.getElementById("miPiace"+indice).value){
+
+            preferiti.push(risposta[indice].id);
+
+            preferiti=Array.from(new Set(preferiti));
+
+            console.log("Preferiti aggiunta like");
+            console.log( preferiti);
+
+
+            }
+            else{
+                console.log("Risposta ");
+                console.log(userResponse.preferiti);
+
+                console.log("Risposta indice");
+                console.log(risposta[indice].id);
+
+                var idRemove=risposta[indice].id;
+
+                for(let i=0;i<preferiti.length;i++){
+                    if(preferiti[i]==idRemove)
+                        preferiti.splice(i,1);
+                }
+
+
+            }
+
+            
+            var settings = {
+                    "url": "http://localhost:3000/utenti/"+document.cookie,
+                    "method": "PUT",
+                    "timeout": 0,
+                    "headers": {
+                    "Content-Type": "application/json"
+                    },
+                    "data": JSON.stringify({
+                    "email": userResponse.email,
+                    "id": userResponse.id,
+                    "nome":userResponse.nome,
+                    "cognome":userResponse.cognome,
+                    "punteggio":userResponse.punteggio,
+                    "password":userResponse.password,
+                    "preferiti":preferiti
+                    }),
+                };
+
+                    $.ajax(settings).done(function (response) {
+
+                    infoResponse=response;
+                    console.log(infoResponse);
+                    //console.log(infoResponse[0].email);
+
+                    window.location.reload();
+                    });
+
+    
+        }
+
+        var email;
+        var userResponse;
+
+        function getEmail(){
+            if(document.cookie && document.cookie!="undefined"){
+        console.log("Il cookie da questa pagina "+document.cookie);
+
+        var settings = {
+                    "url": "http://localhost:3000/utenti/"+document.cookie,
+                    "method": "GET",
+                    "timeout": 0,
+                    };
+
+                    $.ajax(settings).done(function (response) {
+
+                    infoResponse=response;
+                    console.log(infoResponse.email);
+                    //console.log(infoResponse[0].email);
+                    document.getElementById("email").innerHTML+=infoResponse.email;
+                    email=infoResponse.email;
+                    userResponse=infoResponse;
+
+                    infoBacheca();
+      
+                    bachecaPartner();
+                
+                    bachecaAiutatemi();
+                    });
+
+                }
+            }
 
         function sendPost(){
 
-        var email;
+
         var aneddoto= document.getElementById("addAneddoto").value;
         var immagine= document.getElementById("addUri").value;
 
@@ -242,6 +441,9 @@
                     }) 
            
                 }
+            else{
+                window.alert("Non sei loggato");
+            }    
 
         }
 
@@ -253,7 +455,7 @@
         if(!document.cookie || document.cookie=="null")
             window.alert("Non sei loggato non puoi inviare messaggi");
         else{    
-        var messaggio=document.getElementById("textForMessageTo").value;
+        var messaggio=document.getElementById("textForMessageTo"+indice).value;
 
         if(!messaggio)
             window.alert("Non hai inserito nulla");
@@ -268,24 +470,32 @@
 
                 console.log(response);
 
-                var settings = {
-                "url": "http://localhost:3000/messaggio/",
-                "method": "POST",
-                "timeout": 0,
-                "headers": {
-                "Content-Type": "application/json"
-                },
-                "data": JSON.stringify({
-                "mittente": response.email,
-                "messaggio": messaggio,
-                "destinatario":infoResponse[indice].email,
-                "id": "",
-                }),
-            };
-
+                if(response.email==infoResponse[indice].email)
+                {
+                    window.alert("Stai mandando un messaggio a te stesso");
+                }
+                else {
+                    var settings = {
+                    "url": "http://localhost:3000/messaggio/",
+                    "method": "POST",
+                    "timeout": 0,
+                    "headers": {
+                    "Content-Type": "application/json"
+                    },
+                    "data": JSON.stringify({
+                    "mittente": response.email,
+                    "messaggio": messaggio,
+                    "destinatario":infoResponse[indice].email,
+                    "id": "",
+                    }),
+                };
+            
             $.ajax(settings).done(function (response) {
                 console.log(response);
+                window.alert("Messaggio a "+infoResponse[indice].email+" inviato");
+                document.getElementById("textForMessageTo"+indice).value="";
             });
+        }
                 });
 
             }
@@ -303,8 +513,8 @@
                     $.ajax(settings).done(function (response) {
 
                     infoResponse=response;
-                    console.log(infoResponse);
-                    console.log(infoResponse[0]);
+                   // console.log(infoResponse);
+                   // console.log(infoResponse[0]);
 
                     var div=document.getElementById("aiutatemi");
 
@@ -314,13 +524,27 @@
                         var titolo=infoResponse[i].titolo;
 
                         var divPost= document.createElement("div");
-                        divPost.id="divPost";
+                        divPost.id="divHelpPost";
+
+                        divPost.classList.add("border");
+                        divPost.classList.add("border-primary");
+                        divPost.classList.add("form-group");
 
                         var pEmail=document.createElement("p");
                         var pAiuto=document.createElement("p");
                         var pTitolo=document.createElement("p");
+                        var divIntermezzo=document.createElement("div");
                         var inviaMessaggio=document.createElement("input");
                         var testoMessaggio=document.createElement("input");
+
+                        divIntermezzo.appendChild(testoMessaggio);
+                        divIntermezzo.appendChild(inviaMessaggio);
+                        divIntermezzo.classList.add("divTesto");
+
+                        pEmail.id="pId";
+                        testoMessaggio.classList.add("form-control");
+                        inviaMessaggio.classList.add("btn");
+                        inviaMessaggio.classList.add("btn-dark");
 
                         pEmail.innerHTML=nome;
                         pAiuto.innerHTML=aiuto;
@@ -331,14 +555,13 @@
                         inviaMessaggio.addEventListener("click", function(){messageTo(i);}); 
                         testoMessaggio.type="text";
                         testoMessaggio.placeholder="Inserisci testo messaggio";
-                        testoMessaggio.id="textForMessageTo";
+                        testoMessaggio.id="textForMessageTo"+i;
                         
 
-                        divPost.appendChild(pTitolo);
                         divPost.appendChild(pEmail);
+                        divPost.appendChild(pTitolo);
                         divPost.appendChild(pAiuto);
-                        divPost.appendChild(testoMessaggio);
-                        divPost.appendChild(inviaMessaggio);
+                        divPost.appendChild(divIntermezzo);
 
                         div.appendChild(divPost);
                     }
@@ -347,6 +570,75 @@
 
       
         }
+
+    function bachecaPartner(){
+
+        var settings = {
+            "url": "http://localhost:3000/bachecaPartner/",
+            "method": "GET",
+            "timeout": 0,
+            };
+
+            $.ajax(settings).done(function (response) {
+
+            infoResponse=response;
+          //  console.log(infoResponse);
+          //  console.log(infoResponse[0]);
+
+            var div=document.getElementById("partner");
+
+            for(let i=0;i<infoResponse.length;i++){
+                var nome=infoResponse[i].email;
+                var annuncio=infoResponse[i].annuncio;
+                var titolo=infoResponse[i].titolo;
+
+                var divPost= document.createElement("div");
+                divPost.id="divHelpPost";
+
+                divPost.classList.add("border");
+                divPost.classList.add("border-primary");
+                divPost.classList.add("form-group");
+
+                var pEmail=document.createElement("p");
+                var pAnnuncio=document.createElement("p");
+                var pTitolo=document.createElement("p");
+                var divIntermezzo=document.createElement("div");
+                var inviaMessaggio=document.createElement("input");
+                var testoMessaggio=document.createElement("input");
+
+                divIntermezzo.appendChild(testoMessaggio);
+                divIntermezzo.appendChild(inviaMessaggio);
+                divIntermezzo.classList.add("divTesto");
+
+                pEmail.id="pId";
+                testoMessaggio.classList.add("form-control");
+                inviaMessaggio.classList.add("btn");
+                inviaMessaggio.classList.add("btn-dark");
+
+                pEmail.innerHTML=nome;
+                pAnnuncio.innerHTML=annuncio;
+                pTitolo.innerHTML=titolo;
+                pTitolo.id="titleHelp";
+                inviaMessaggio.type="button";
+                inviaMessaggio.value="Scrivimi";
+                inviaMessaggio.addEventListener("click", function(){messageTo(i);}); 
+                testoMessaggio.type="text";
+                testoMessaggio.placeholder="Inserisci testo messaggio";
+                testoMessaggio.id="textForMessageTo"+i;
+                
+
+                divPost.appendChild(pEmail);
+                divPost.appendChild(pTitolo);
+                divPost.appendChild(pAnnuncio);
+                divPost.appendChild(divIntermezzo);
+
+                div.appendChild(divPost);
+            }
+
+            });
+
+
+}
 
 
     </script>

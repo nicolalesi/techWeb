@@ -7,8 +7,29 @@
     </head>
     <style>
         #divMessaggio{
-            border-top: 3px;
-            border-style: solid;
+            padding: 20px;
+            border-radius: 20px;
+            margin-top: 10px;
+        }
+        #casellaPosta{
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+        }
+        #mittente{
+            padding: 20px;
+            background-color: deepskyblue;
+            width: 100%;
+            color: whitesmoke;
+            font-weight: bold;
+            border-radius: 20px;
+        }
+        #container{
+            margin-bottom: 10px;
+        }
+        .title{
+            font-weight: bold;
+            color: cornflowerblue;
         }
     </style>
     <script>
@@ -61,8 +82,12 @@
                         var pMessaggio=document.createElement("p");
 
                         divMessaggio.id="divMessaggio";
+                        divMessaggio.classList.add("border");
+                        divMessaggio.classList.add("border-primary");
                         pMittente.innerHTML=response[i].mittente;
+                        pMittente.id="mittente";
                         pMessaggio.innerHTML=response[i].messaggio;
+
 
                         divMessaggio.appendChild(pMittente);
                         divMessaggio.appendChild(pMessaggio);
@@ -114,7 +139,7 @@
             </div>    
         </div>
 
-        <div>
+        <div id="container">
             <table class="table">
                 <thead class="table-primary">
                     <th> Username </td>
@@ -130,7 +155,7 @@
                 </tr>
             </table>
             <div id="casellaPosta">
-                <h3> La tua casella di posta</h3>
+                <h3 class="title"> La tua casella di posta</h3>
             </div>
             <button onclick="logout()" class="btn btn-primary">
                 Logout

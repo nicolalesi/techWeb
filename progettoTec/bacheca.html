@@ -112,6 +112,9 @@
         .divTesto{
             display: flex;
         }
+        #divModifica{
+            margin-bottom: 20px;
+        }
     </style>
     <body>
         <div class="card text-center">
@@ -250,19 +253,61 @@
                         pImage.id="imgAnimale";
                         miPiace.id="miPiace"+i;
                         miPiace.classList.add("miPiace");
-                        if(findId(userResponse.preferiti,id)){
-                            miPiace.src="cuoreMiPiace.png";
-                            miPiace.value="true";
-                            clicked=true;
+
+
+                        if(document.cookie=="admin"){
+                            miPiace.src="modifica.png";
+
+                            var divModifica=document.createElement("div");
+                            divModifica.id="divModifica";
+                            var informazioni=document.createElement("p");
+                            informazioni.innerHTML="Inserisci il dato che vuoi modificare e poi clicca il bottone in basso a destra per effettuare la modifica";
+                            var inputEmail=document.createElement("input");
+                            inputEmail.placeholder="Modifica email ";
+                            inputEmail.id="inputEmail"+i;
+                            var inputAneddoto=document.createElement("input");
+                            inputAneddoto.placeholder="Modifica aneddoto ";
+                            inputAneddoto.id="inputAneddoto"+i;
+                            var inputImmagine=document.createElement("input");
+                            inputImmagine.placeholder="Modifica URI immagine ";
+                            inputImmagine.id="inputImmagine"+i;
+                            var deletePost=document.createElement("input");
+                            deletePost.type="button";
+                            deletePost.value="Elimina Post";
+                            deletePost.classList.add("btn");
+                            deletePost.classList.add("btn-danger");
+                            deletePost.addEventListener("click",function(){
+                                eliminaPost(infoResponse,i);
+                            });
+
+                            divModifica.appendChild(informazioni);
+                            divModifica.appendChild(inputEmail);
+                            divModifica.appendChild(inputAneddoto);
+                            divModifica.appendChild(inputImmagine);
+                            divModifica.appendChild(deletePost);
+
+                            divPost.appendChild(divModifica);
+
+                            miPiace.addEventListener("click",function(){
+                                window.alert("Stai modificando il post con indice "+i);
+                                //nome aneddoto immagine id
+                                adminUpdatePost(infoResponse,i);
+                            });
+
                         }
                         else{
-                            miPiace.src="miPiace.png";
-                            miPiace.value="false";
-                            clicked=false;
-                        }
+                            if(findId(userResponse.preferiti,id)){
+                                miPiace.src="cuoreMiPiace.png";
+                                miPiace.value="true";
+                                clicked=true;
+                            }
+                            else{
+                                miPiace.src="miPiace.png";
+                                miPiace.value="false";
+                                clicked=false;
+                            }
 
-                        divPost.id="divPost";
-                        miPiace.addEventListener("click", function(){
+                            miPiace.addEventListener("click", function(){
                             if(clicked){
                                 miPiace.src="miPiace.png";
                             }
@@ -271,6 +316,9 @@
                                 miPiace.src="cuoreMiPiace.png";
                             }
                             addLike(infoResponse,i)}); 
+                        }
+
+                        divPost.id="divPost";
 
                         divPost.appendChild(pEmail);
                         divPost.appendChild(pAneddoto);
@@ -365,7 +413,7 @@
         var userResponse;
 
         function getEmail(){
-            if(document.cookie && document.cookie!="undefined"){
+            if(document.cookie && document.cookie!="undefined" && document.cookie!="admin"){
         console.log("Il cookie da questa pagina "+document.cookie);
 
         var settings = {
@@ -391,6 +439,12 @@
                     });
 
                 }
+
+                if(document.cookie=="admin"){
+                infoBacheca();
+                bachecaPartner();
+                bachecaAiutatemi();
+            }
             }
 
         function sendPost(){
@@ -637,8 +691,91 @@
 
             });
 
+        }
 
-}
+        function adminUpdatePost(infoResponse,i){
+
+            console.log(infoResponse);
+
+            var id=infoResponse[i].id;
+
+            var newEmail;
+            var newAneddoto;
+            var newImmagine;
+
+            if(document.getElementById("inputEmail"+i).value){
+                var newEmail=document.getElementById("inputEmail"+i).value;
+            }
+            if(document.getElementById("inputAneddoto"+i).value){
+                var newAneddoto=document.getElementById("inputAneddoto"+i).value;
+            }
+            if(document.getElementById("inputImmagine"+i).value){
+                var newImmagine=document.getElementById("inputImmagine"+i).value;
+            }
+
+            console.log(i);
+
+            if(!newEmail)
+                newEmail=infoResponse.email;
+            if(!newAneddoto)
+                newAneddoto=infoResponse.aneddoto;
+            if(!newImmagine)
+                newImmagine=infoResponse.immagine;
+
+                console.log(i);
+                console.log(newEmail);
+                console.log(newAneddoto);
+                console.log(newImmagine);
+
+                console.log(i);
+
+
+            var updatePost= {
+                    "url": "http://localhost:3000/bacheca/"+id,
+                    "method": "PUT",
+                    "timeout": 0,
+                    "headers": {
+                    "Content-Type": "application/json"
+                    },
+                    "data": JSON.stringify({
+                    "email": newEmail,
+                    "aneddoto": newAneddoto,
+                    "immagine": newImmagine,
+                    }),
+            };         
+
+                $.ajax(updatePost).done(function (response) {
+
+                    infoResponse=response;
+                    console.log(infoResponse);
+                    window.location.reload();
+                     });
+                
+
+            
+            }
+
+            function eliminaPost(infoResponse,i){
+
+                var settings = {
+                "url": "http://localhost:3000/bacheca/"+infoResponse[i].id,
+                "method": "DELETE",
+                "timeout": 0,
+                "headers": {
+                "Content-Type": "application/json"
+                }
+                };
+
+                $.ajax(settings).done(function (response) {
+                console.log(response);
+              
+                window.alert("Post eliminato");
+                window.location.reload();
+            });
+
+
+
+            }
 
 
     </script>

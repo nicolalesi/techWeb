@@ -27,6 +27,7 @@
             height: 50vh;
             margin-left: 40px;
             border-radius: 10px;
+            display: none;
          }
          #containerRisposte>p{
             padding:20px;
@@ -49,26 +50,38 @@
     </style>
     <script>
 
+        var animalsInfo;
+
         function getInfo(){
-			var infoJSON;
-			let request=new XMLHttpRequest();
-			request.open("GET","https://api-ninjas.com/api/animals");
-			request.send();
-			
-			request.onload=()=>{
-				if(request.status==200){
-					console.log(request.response);
-				}else
-				{
-					console.log("errore");
-				}
-			}
+            
+            $.ajax({
+                method: 'GET',
+                url: 'https://api.api-ninjas.com/v1/animals?name=b',
+                headers: { 'X-Api-Key': '6cuPFxMPEbTL/peOvztdzA==QKgsunYVjTstv41x'},
+                contentType: 'application/json',
+                success: function(result) {
+                    console.log(result);
+                    //var random=Math.floor(Math.random() * result.length);
+                    //console.log(result[0].locations[0]);
+                    animalsInfo=result;
+                    getCities();
+                    //disegnaAnimale(result[random]);
+                    //disegnaAnimale();
+                },
+                error: function ajaxError(jqXHR) {
+                    console.error('Error: ', jqXHR.responseText);
+                }
+});
 
 		}
 		getInfo();
 
-        function getCities(country){
+        function getCities(){
+            var random=Math.floor(Math.random() * animalsInfo.length);
+            var country=animalsInfo[random].locations[0];
             var infoJSON;
+            disegnaAnimale(random);
+
             let request=new XMLHttpRequest();
 			request.open("GET","https://restcountries.com/v3.1/all");
 			request.send();
@@ -110,22 +123,22 @@
             }
         }
 
-        function disegnaAnimale(infoJSON){
+        function disegnaAnimale(random){
 
-            console.log(infoJSON.name);
+            //console.log(infoJSON.name);
 
             var p=document.getElementById("informazioni");
-            p.innerHTML=" <b> Nome : </b> "+infoJSON.name;
+            p.innerHTML=" <b> Nome : </b> "+animalsInfo[random].name;
 
-            var img=document.getElementById("imgAnimale");
-            img.setAttribute("src",infoJSON.image_link);
+           // var img=document.getElementById("imgAnimale");
+           // img.setAttribute("src",infoJSON.image_link);
 
         }
 
         function refresh(){
-            getInfo();
+            getCities();
             for(let i=0;i<solutions.length;i++){
-                    document.getElementById(randomPlace[i]).style.backgroundColor="white";
+                    document.getElementById(randomPlace[i]).style.backgroundColor="lightgrey";
             }
         }
 
@@ -163,7 +176,8 @@
                     "password": infoResponse.password,
                     "nome": infoResponse.nome,
                     "cognome":infoResponse.cognome,
-                    "punteggio":punteggio
+                    "punteggio":punteggio,
+                    "preferiti":infoResponse.preferiti
                     }),
 
                     
@@ -171,6 +185,7 @@
 
             $.ajax(settings).done(function (response) {
                 console.log(response);
+                window.location.reload();
             });
 
                     });
@@ -288,6 +303,8 @@
 
                     var div=document.getElementById("leaderBoard");
                     var divPunteggio= document.createElement("table");
+                    divPunteggio.classList.add("table");
+                    divPunteggio.classList.add("table-primary");
 
                     var primaRiga=document.createElement("tr");
                     var email=document.createElement("th");

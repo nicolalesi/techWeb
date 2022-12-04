@@ -4,6 +4,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <title> Info sugli animali </title>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     </head>
     <style>
          #container{
@@ -26,51 +27,93 @@
             font-size: 15px;
             font-family: 'Courier New', Courier, monospace;
          }
+         #imgAnimale{
+            display: none;
+         }
+         #button{
+            height: 20%;
+         }
     </style>
     <script>
 
+        var  animalsInfo;
+
         function getInfo(){
-			var infoJSON;
-			let request=new XMLHttpRequest();
-			request.open("GET","http://zoo-animal-api.herokuapp.com/animals/rand/");
-			request.send();
 			
-			request.onload=()=>{
-				if(request.status==200){
-					infoJSON=JSON.parse(request.response);
-					console.log(infoJSON);
-					disegnaAnimale(infoJSON);
-				}else
-				{
-					console.log("errore");
-				}
-			}
+            $.ajax({
+                method: 'GET',
+                url: 'https://api.api-ninjas.com/v1/animals?name=a',
+                headers: { 'X-Api-Key': '6cuPFxMPEbTL/peOvztdzA==QKgsunYVjTstv41x'},
+                contentType: 'application/json',
+                success: function(result) {
+                    console.log(result);
+                    animalsInfo=result;
+                    disegnaAnimale();
+                },
+                error: function ajaxError(jqXHR) {
+                    console.error('Error: ', jqXHR.responseText);
+                }
+            });
 		}
 		getInfo();
 
-        function disegnaAnimale(infoJSON){
+        function disegnaAnimale(){
 
-            console.log(infoJSON.name);
+            var random=Math.floor(Math.random() * animalsInfo.length);
 
-            var p=document.getElementById("informazioni");
-            p.innerHTML=" <b> Nome : </b> "+infoJSON.name;
-            p.innerHTML+="<br/> <b> Nome latino : </b> "+infoJSON.latin_name;
-            p.innerHTML+="<br/> <b> Tipo di animale : </b> "+infoJSON.animal_type;
-            p.innerHTML+="<br/> <b> Momento di attività : </b> "+infoJSON.active_time;
-            p.innerHTML+="<br/> <b> Lunghezza minima : </b>"+infoJSON.length_min+". <b> Lunghezza massima : </b> "+infoJSON.length_max;
-            p.innerHTML+="<br/> <b> Peso minimo : </b> "+infoJSON.weight_min+".<b> Peso massimo  </b>: "+infoJSON.weight_max;
-            p.innerHTML+="<br/> <b> Anni di vita : </b>"+infoJSON.lifespan;
-            p.innerHTML+="<br/> <b> Habitat : </b> "+infoJSON.habitat;
-            p.innerHTML+="<br/> <b> Dieta : </b> "+infoJSON.diet;
-            p.innerHTML+="<br/> <b> Luogo geografico : </b> "+infoJSON.geo_range;
 
+            infoJSON=animalsInfo[random];
+
+            console.log(infoJSON.characteristics);
+            var stringa=JSON.stringify(infoJSON.characteristics);
+            var spl = stringa.split('",');
+            console.log(spl);
+
+            var div=document.getElementById("informazioni");
+            div.innerHTML='';
+
+            var nome=document.createElement("p");
+            nome.innerHTML='"Name" : "'+infoJSON.name+'",';
+            div.appendChild(nome);
+            /*
+            p.innerHTML=" <b> Name : </b> "+infoJSON.name;
+            p.innerHTML+="<br/> <b> Color : </b> "+infoJSON.characteristics.color;
+            p.innerHTML+="<br/> <b> Common name : </b> "+infoJSON.characteristics.common_name;
+            p.innerHTML+="<br/> <b> Diet : </b> "+infoJSON.characteristics.diet;
+            p.innerHTML+="<br/> <b> Length : </b>"+infoJSON.length;
+            p.innerHTML+="<br/> <b> Lifespan : </b> "+infoJSON.lifespan;
+            p.innerHTML+="<br/> <b> Litter Size : </b>"+infoJSON.litter_size;*/
+
+            var j=0;
+
+            for(let i=1;i<spl.length-1;i++){
+                
+                var p=document.createElement("p");
+                p.innerHTML=spl[i]+'",';
+               /* console.log(j);
+                if(j>=4){
+                    p.innerHTML+=spl[i]+'<br/>';
+                    j=1;
+                }
+                else{
+                    p.innerHTML+=spl[i];
+                    j++;
+                }*/
+
+                console.log(spl[i]);
+                spl[i].replace('"', "");
+                div.appendChild(p);
+                
+            }
+
+            
             var img=document.getElementById("imgAnimale");
             img.setAttribute("src",infoJSON.image_link);
 
         }
 
     function refresh(){
-        getInfo();
+        disegnaAnimale();
     }
     </script>
     <body>
@@ -107,11 +150,10 @@
         </div>
         <div id="container">
             <div id="containerInfo" class="mt-5">
-                <div>
-                    <p id="informazioni"></p>
-                    <input type="button" onclick="refresh()" value="Nuovo animale" class="btn btn-primary"/>
+                <div id="informazioni">
                 </div>
                 <img id="imgAnimale" class="img-thumbnail">
+                <input type="button" onclick="refresh()" value="Nuovo animale" class="btn btn-primary" id="button"/>
             </div>
         </div>    
     </body>

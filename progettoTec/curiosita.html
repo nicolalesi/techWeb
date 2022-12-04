@@ -27,15 +27,15 @@
     <!--https://www.dogfactsapi.ducnguyen.dev/api/v1/facts/?number=5-->
     <script>
 
-        function getPhoto(){
+        /*function getPhoto(){
 			var infoJSON;
 			let request=new XMLHttpRequest();
-			request.open("GET","https://dog.ceo/api/breeds/image/random");
+			request.open("GET","https://cataas.com/cat");
 			request.send();
 			
 			request.onload=()=>{
 				if(request.status==200){
-					infoJSON=JSON.parse(request.response);
+					infoJSON=request.response;
 					console.log(infoJSON);
 					disegnaAnimale(infoJSON);
 				}else
@@ -44,12 +44,12 @@
 				}
 			}
 		}
-		getPhoto();
+		getPhoto();*/
 
         function getInfo(){
             var infoJSON;
 			let request=new XMLHttpRequest();
-			request.open("GET","https://www.dogfactsapi.ducnguyen.dev/api/v1/facts/?number=5");
+			request.open("GET","https://meowfacts.herokuapp.com/");
 			request.send();
 			
 			request.onload=()=>{
@@ -57,6 +57,7 @@
 					infoJSON=JSON.parse(request.response);
 					console.log(infoJSON);
 					scriviInfo(infoJSON);
+                    disegnaAnimale();
 				}else
 				{
 					console.log("errore");
@@ -69,21 +70,19 @@
 
         function scriviInfo(infoJSON){
             var p=document.getElementById("informazioni");
-            p.innerHTML=infoJSON.facts[0];
+            p.innerHTML=infoJSON.data[0];
+
         }
 
-        function disegnaAnimale(infoJSON){
-
-        console.log(infoJSON.name);
+        function disegnaAnimale(){
 
         var img=document.getElementById("imgAnimale");
-        img.setAttribute("src",infoJSON.message);
+        img.setAttribute("src","https://cataas.com/cat");
 
         }
 
         function refresh(){
-            getPhoto();
-            getInfo();
+            window.location.reload();
         }
     </script>    
     <body>

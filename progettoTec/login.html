@@ -68,54 +68,13 @@
           console.log(nomeUtente);
           console.log(password);
 
-
-			/*let request=new XMLHttpRequest();
-			request.open("GET","http://localhost:3000/utenti?email="+nomeUtente);
-			request.send();
-			
-      var infoJSON;
-
-	  request.onload=()=>{
-
-				if(request.status==200){
-					infoJSON=JSON.parse(request.response);
-					console.log(infoJSON);
-          console.log(infoJSON[0].email +"Email");
-
-          var login=false;
-
-          infoResponse=infoJSON;
-          console.log(infoResponse);
-          console.log(infoResponse.email);
-          if(infoResponse[0]){
-            {
-              console.log("L'utente esiste");
-              if(infoResponse[0].password==password){
-
-                console.log("Puoi accedere");
-                //document.cookie=infoResponse[0].id;
-                var id= Q.defer();
-                id=infoResponse[0].id;
-                id.resolve;
-                console.log("Cookie salvato "+document.cookie);
-                window.alert("Hai effettuato correttamente il login");
-                document.location.href="AreaPersonale.html";
-              }
-              else{
-                console.log("Password errata ");
-                window.alert("Password errata");
-              }
-            }
+          if(nomeUtente=="admin" && password=="admin"){
+            console.log("Sei un amministratore");
+            document.cookie="admin";
+            window.alert("Sei un amministratore avrai accesso a funzionalità extra");
+            window.location.href="Home.html";
           }
-
-  
-
-				}else
-          {
-            window.alert("L'utente non esiste");
-          }
-			}*/
-
+          else {
           var settings = {
           "url": "http://localhost:3000/utenti?email="+nomeUtente,
           "method": "GET",
@@ -152,7 +111,7 @@
           }
         
         });
-
+      }
 
         return false;
         }
@@ -205,7 +164,8 @@
               "password": password,
               "nome":nome,
               "cognome":cognome,
-              "punteggio":0
+              "punteggio":0,
+              "preferiti": []
             }),
           };
 

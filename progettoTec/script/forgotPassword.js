@@ -49,7 +49,8 @@ function inviaNuovaPassword(){
                 "password": password,
                 "nome": infoResponse[0].nome,
                 "cognome":infoResponse[0].cognome,
-                "punteggio":infoResponse[0].punteggio
+                "punteggio":infoResponse[0].punteggio,
+                "preferiti":infoResponse.preferiti
                 }),
 
             };

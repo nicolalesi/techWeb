@@ -22,10 +22,15 @@
 .title{
     font-weight: bold;
     color: cornflowerblue;
+    margin:10px;
 }
 #buttonsDiv{
     margin-bottom: 20px;
+    margin: 10px;
 }
 th{
     color: blue;
+}
+#divAdmin{
+    margin:10px;
 }

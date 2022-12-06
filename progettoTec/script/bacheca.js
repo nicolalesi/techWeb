@@ -85,12 +85,15 @@
                         var inputEmail=document.createElement("input");
                         inputEmail.placeholder="Modifica email ";
                         inputEmail.id="inputEmail"+i;
+                        inputEmail.classList.add("form-control");
                         var inputAneddoto=document.createElement("input");
                         inputAneddoto.placeholder="Modifica aneddoto ";
                         inputAneddoto.id="inputAneddoto"+i;
+                        inputAneddoto.classList.add("form-control");
                         var inputImmagine=document.createElement("input");
                         inputImmagine.placeholder="Modifica URI immagine ";
                         inputImmagine.id="inputImmagine"+i;
+                        inputImmagine.classList.add("form-control");
                         var deletePost=document.createElement("input");
                         deletePost.type="button";
                         deletePost.value="Elimina Post";
@@ -250,6 +253,8 @@
                 document.getElementById("email").innerHTML+=infoResponse.email;
                 email=infoResponse.email;
                 userResponse=infoResponse;
+
+                console.log(userResponse);
 
                 infoBacheca();
   

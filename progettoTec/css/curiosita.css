@@ -14,3 +14,14 @@
      height: 50vh;
      margin-left: 40px;
   }
+
+  @media only screen and (min-width:150px) and (max-width:700px) {
+   #imgAnimale{
+      width: 100%;
+      margin-left: 0px;
+   }
+   #containerInfo{
+      display: flex;
+      flex-direction: column;
+   }
+  }

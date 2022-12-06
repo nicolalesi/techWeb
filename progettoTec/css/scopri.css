@@ -24,3 +24,13 @@
  #button{
     height: 20%;
  }
+
+ @media only screen and (min-width:150px) and (max-width:700px) {
+   #container{
+      display: flex;
+   }
+   #containerInfo{
+      display: flex;
+      flex-direction: column;
+   }
+ }

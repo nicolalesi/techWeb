@@ -1,20 +1,12 @@
 {
   "utenti": [
     {
-      "email": "luca@porfiri.me",
-      "password": "Caccola",
+      "email": "luca@porfiri.it",
+      "password": "Ciaoatutti",
       "nome": "Luca",
       "cognome": "Porfiri",
-      "punteggio": 10,
+      "punteggio": "10",
       "id": "-PbGQ6I"
-    },
-    {
-      "email": "jessica@rabbit.it",
-      "id": "3YE4wVg",
-      "password": "Ciaoatutti",
-      "nome": "Jessica",
-      "cognome": "Rabbit",
-      "punteggio": 0
     },
     {
       "email": "gionny@stecchino.it",
@@ -22,41 +14,30 @@
       "nome": "Gionny",
       "cognome": "Stecchino",
       "punteggio": 1,
-      "id": "KHr3vWe"
+      "id": "KHr3vWe",
+      "preferiti": []
     },
     {
       "email": "nicol@alesi.it",
       "password": "Ciaoatutti",
       "nome": "Nicol",
       "cognome": "Alesi",
-      "id": "FltHxTM",
-      "punteggio": 0
+      "punteggio": 10,
+      "id": "FltHxTM"
     }
   ],
   "bacheca": [
     {
-      "email": "gionny@stecchino.it",
-      "aneddoto": "Ciao a tutti",
-      "immagine": "https://i0.wp.com/notiziescientifiche.it/wp-content/uploads/2019/09/uro-Bos-primigenius.jpg?resize=1030%2C438&ssl=1",
+      "email": "nicol@alesi.it",
+      "aneddoto": "I pokèmon sono come gli animali",
+      "immagine": "https://lh3.googleusercontent.com/05JfZ1ZdyzrRNvhJosUFdcjjJRFE7k2KhmeM2ujqeCbrcrCb1hkq7O_JdUBpQ3r9hi0YeSn4WgmKx3Ai8LHdM2SucxSzl9TRZ4fCAqETJ6WtHgE=s0",
       "id": 1
     },
     {
       "email": "nicol@alesi.it",
-      "aneddoto": "I pokémon sono come gli animali",
-      "immagine": "https://media.pokemoncentral.it/wiki/b/b5/Pok%C3%A9mon_accompagnatore_LGPE_artwork.png",
+      "aneddoto": "Il cane è il migliore amico dell'uomo",
+      "immagine": "https://media-assets.wired.it/photos/615db921d8b66b13086d090c/1:1/w_590,h_590,c_limit/wired_placeholder_dummy.png",
       "id": 2
-    },
-    {
-      "email": "nicol@alesi.it",
-      "aneddoto": "Il mio cane è simpatico",
-      "immagine": "https://media.istockphoto.com/id/1213516345/it/foto/pazzo-dallaspetto-bianco-e-nero-bordo-collie-cane-dire-guardando-intensamente-su-sfondo-giallo.jpg?s=612x612&w=is&k=20&c=W8bbhdIM1DdnnEUrMR8c7QvaUXAQj6IQw1OZTb0_ilc=",
-      "id": 3
-    },
-    {
-      "email": "nicol@alesi.it",
-      "aneddoto": "Gatto domestico",
-      "immagine": "https://upload.wikimedia.org/wikipedia/commons/9/9e/Ginger_european_cat.jpg",
-      "id": 4
     }
   ],
   "bachecaAiuto": [
@@ -78,14 +59,13 @@
     {
       "email": "gionny@stecchino.it",
       "titolo": "Cerco partner",
-      "aiuto": "Ambulatorio veterinario cerca canile partner",
+      "annuncio": "Ambulatorio veterinario cerca canile partner",
       "id": 1
     },
     {
       "email": "nicol@alesi.it",
       "titolo": "Cerco sponsor",
-      "aiuto": "Cerco sponsor per gara ad ostacoli",
-      "immagine": "https://media.pokemoncentral.it/wiki/b/b5/Pok%C3%A9mon_accompagnatore_LGPE_artwork.png",
+      "annuncio": "Cerco sponsor per gara ad ostacoli",
       "id": 2
     }
   ],
@@ -161,6 +141,96 @@
       "messaggio": "Con ilriso",
       "destinatario": "gionny@stecchino.it",
       "id": 18
+    },
+    {
+      "mittente": "gionny@stecchino.it",
+      "messaggio": "Io posso aiutarti",
+      "destinatario": "gionny@stecchino.it",
+      "id": 19
+    },
+    {
+      "mittente": "gionny@stecchino.it",
+      "messaggio": "Ciao io posso aiutarti",
+      "destinatario": "nicol@alesi.it",
+      "id": 20
+    },
+    {
+      "mittente": "gionny@stecchino.it",
+      "messaggio": "Anche a te",
+      "destinatario": "gionny@stecchino.it",
+      "id": 21
+    },
+    {
+      "mittente": "gionny@stecchino.it",
+      "messaggio": "Anche a te",
+      "destinatario": "gionny@stecchino.it",
+      "id": 22
+    },
+    {
+      "mittente": "gionny@stecchino.it",
+      "messaggio": "Ciao io posso aiutarti",
+      "destinatario": "nicol@alesi.it",
+      "id": 23
+    },
+    {
+      "mittente": "gionny@stecchino.it",
+      "messaggio": "fasca",
+      "destinatario": "nicol@alesi.it",
+      "id": 24
+    },
+    {
+      "mittente": "nicol@alesi.it",
+      "messaggio": "Posso aiutarti",
+      "destinatario": "gionny@stecchino.it",
+      "id": 25
+    },
+    {
+      "mittente": "nicol@alesi.it",
+      "messaggio": "Vorrei partecipare",
+      "destinatario": "gionny@stecchino.it",
+      "id": 26
+    },
+    {
+      "mittente": "nicol@alesi.it",
+      "messaggio": "Posso aiutare",
+      "destinatario": "gionny@stecchino.it",
+      "id": 27
+    },
+    {
+      "mittente": "nicol@alesi.it",
+      "messaggio": "Si",
+      "destinatario": "gionny@stecchino.it",
+      "id": 28
+    },
+    {
+      "mittente": "nicol@alesi.it",
+      "messaggio": "ueee deficiente",
+      "destinatario": "gionny@stecchino.it",
+      "id": 29
+    },
+    {
+      "mittente": "nicol@alesi.it",
+      "messaggio": "E adesso che mi lasci solo",
+      "destinatario": "gionny@stecchino.it",
+      "id": 30
+    },
+    {
+      "mittente": "nicol@alesi.it",
+      "messaggio": "urca",
+      "destinatario": "gionny@stecchino.it",
+      "id": 31
+    },
+    {
+      "mittente": "nicol@alesi.it",
+      "messaggio": "CIAO",
+      "destinatario": "gionny@stecchino.it",
+      "id": 32
+    },
+    {
+      "mittente": "nicol@alesi.it",
+      "messaggio": "Ciao volevo propormi",
+      "destinatario": "gionny@stecchino.it",
+      "id": 33
     }
   ]
 }

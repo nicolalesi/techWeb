@@ -1,0 +1,108 @@
+#container{
+    display: flex;
+    flex-direction: column;
+}
+#titolo{
+    align-self: center;
+    margin-top: 1%;
+    font-weight: bold;
+    font-family: Helvetica, Arial, sans-serif;
+}
+#containerInfo{
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+    width:100% ;
+}
+#imgAnimale{
+    width: 40%;
+    height: 30%;
+    border-radius: 20px;
+}
+#containerInfo{
+    padding: 20px;
+    flex-direction: column-reverse;
+    
+}
+#fotoBacheca{
+    width: 10%;
+}
+#divPost{
+    border: 3px block;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    max-height: 250;
+    border-radius: 20px;
+    margin-top: 30px;
+    padding: 20px;
+}
+#divHelpPost{
+    border: 3px block;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    max-height: 250;
+    border-radius: 20px;
+    margin-top: 30px;
+    padding: 20px;
+}
+#aneddoti{
+    display: none;
+    display: flex;
+    flex-direction: column;
+}
+#partner{
+    display: none;
+}
+#aiutatemi{
+    display: none;
+}
+#titleHelp{
+    font-weight: bold;
+}
+.miPiace{
+    width: 50px;
+    height: 50px;
+    align-self: flex-end;
+    margin-left: 55%;
+}
+#pId{
+    padding: 20px;
+    background-color: deepskyblue;
+    width: 100%;
+    color: whitesmoke;
+    font-weight: bold;
+    border-radius: 20px;
+}
+#pAneddoto{
+    padding: 20px;
+    width: 100%;
+    flex: 80%;
+}
+#containerButtons{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#loggato {
+    align-self: center;
+    font-size: 15px;
+}
+#divAggiuntaPost{
+    display: flex;
+    flex-direction: column;
+    margin:10px
+}
+#email{
+    display: none;
+}
+#formAggiunta{
+    padding: 20px;
+}
+.divTesto{
+    display: flex;
+}
+#divModifica{
+    margin-bottom: 20px;
+}

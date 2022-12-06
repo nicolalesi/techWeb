@@ -1,0 +1,9 @@
+#nuovaPassword{
+    display: none;
+}
+#container{
+    display: flex;
+    padding: 20px;
+    align-content: center;
+    justify-content: center;
+}

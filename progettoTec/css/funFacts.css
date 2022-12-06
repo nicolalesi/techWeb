@@ -1,0 +1,16 @@
+#container{
+    display: flex;
+    flex-direction: column;
+ }
+ #titolo{
+    align-self: center;
+ }
+ #containerInfo{
+    display:flex;
+    justify-content: center;
+ }
+ #imgAnimale{
+    width: 35vw;
+    height: 50vh;
+    margin-left: 40px;
+ }

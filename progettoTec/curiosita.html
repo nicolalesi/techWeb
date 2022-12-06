@@ -2,89 +2,13 @@
     <head> 
         <title> Info sugli animali </title>
         <title> Info sugli animali </title>
+        <script src="script/curiosita.js"></script>
+        <link rel="stylesheet" href="css/curiosita.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <title> Info sugli animali </title>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     </head>
-    <style>
-        #container{
-           display: flex;
-           flex-direction: column;
-        }
-        #titolo{
-           align-self: center;
-        }
-        #containerInfo{
-           display:flex;
-           justify-content: center;
-        }
-        #imgAnimale{
-            width: 30vw;
-            height: 50vh;
-            margin-left: 40px;
-         }
-   </style>
-    <!--https://www.dogfactsapi.ducnguyen.dev/api/v1/facts/?number=5-->
-    <script>
-
-        /*function getPhoto(){
-			var infoJSON;
-			let request=new XMLHttpRequest();
-			request.open("GET","https://cataas.com/cat");
-			request.send();
-			
-			request.onload=()=>{
-				if(request.status==200){
-					infoJSON=request.response;
-					console.log(infoJSON);
-					disegnaAnimale(infoJSON);
-				}else
-				{
-					console.log("errore");
-				}
-			}
-		}
-		getPhoto();*/
-
-        function getInfo(){
-            var infoJSON;
-			let request=new XMLHttpRequest();
-			request.open("GET","https://meowfacts.herokuapp.com/");
-			request.send();
-			
-			request.onload=()=>{
-				if(request.status==200){
-					infoJSON=JSON.parse(request.response);
-					console.log(infoJSON);
-					scriviInfo(infoJSON);
-                    disegnaAnimale();
-				}else
-				{
-					console.log("errore");
-				}
-			}
-
-        }
-
-        getInfo();
-
-        function scriviInfo(infoJSON){
-            var p=document.getElementById("informazioni");
-            p.innerHTML=infoJSON.data[0];
-
-        }
-
-        function disegnaAnimale(){
-
-        var img=document.getElementById("imgAnimale");
-        img.setAttribute("src","https://cataas.com/cat");
-
-        }
-
-        function refresh(){
-            window.location.reload();
-        }
-    </script>    
+    <!--https://www.dogfactsapi.ducnguyen.dev/api/v1/facts/?number=5-->  
     <body>
         <div class="card text-center">
             <div class="card-header">
@@ -128,27 +52,4 @@
         </div>    
     </body>
 </html>
-<script>
-    console.log(document.cookie);
-    var test=document.cookie;
-    console.log(test);
-    if(document.cookie){
-
-        if(document.cookie=="null"){
-            document.getElementById("login").style.display="block";
-            document.getElementById("areaPersonale").style.display="none";
-        }
-        else {
-            document.getElementById("login").style.display="none";
-            document.getElementById("areaPersonale").style.display="block";
-        }
-    }
-    else{
-        document.getElementById("login").style.display="block";
-        document.getElementById("areaPersonale").style.display="none";
-    }
-
-    /*document.getElementById("login").style.display="block";
-    document.getElementById("areaPersonale").style.display="block";*/
-
-</script>
+<script src="script/showLogin.js"></script>

@@ -1,0 +1,16 @@
+#container{
+    display: flex;
+    flex-direction: column;
+}
+#titolo{
+    align-self: center;
+    margin-top: 1%;
+}
+#containerInfo{
+    display:flex;
+    justify-content: center;
+}
+ #imgAnimale{
+    width: 40%;
+    align-self: center;
+ }

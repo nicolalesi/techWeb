@@ -2,15 +2,12 @@
     <head> 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script type="text/javascript" src="C:\Users\niky0\OneDrive\Documenti\GitHub\techWeb\q-master\q.js"></script>
+        <script src="script/eliminaAccount.js"></script>
+        <link rel="stylesheet" href="css/eliminaAccount.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
           <title> Info sugli animali </title>
           <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       </head>
-      <style>
-        #nuovaPassword{
-            display: none;
-        }
-      </style>
     <body>
         <div class="card text-center">
             <div class="card-header">
@@ -40,34 +37,10 @@
                 </ul>
             </div>    
         </div>
-        <div>
+        <div id="container">
             <div>
-                <input type="button" value="Confermo di voler eliminare il mio account" onclick="eliminaAccount()"/>
+                <input type="button" value="Confermo di voler eliminare il mio account" onclick="eliminaAccount()" class="btn btn-primary"/>
             </div>
         </div>
     </body>
 </html>
-<script>
-
-    function eliminaAccount(){
-
-
-        var settings = {
-                "url": "http://localhost:3000/utenti/"+document.cookie,
-                "method": "DELETE",
-                "timeout": 0,
-                "headers": {
-                "Content-Type": "application/json"
-                }
-            };
-
-            $.ajax(settings).done(function (response) {
-            console.log(response);
-            document.cookie="null";
-            window.alert("Account eliminato");
-            window.location.href="Home.html";
-        });
-   
-
-    }
-</script>

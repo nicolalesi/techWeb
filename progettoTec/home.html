@@ -1,28 +1,11 @@
 <!DOCTYPE html>
 <html>
     <head> 
+        <link rel="stylesheet" href="css/home.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <title> Info sugli animali </title>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     </head>
-    <style>
-        #container{
-            display: flex;
-            flex-direction: column;
-        }
-        #titolo{
-            align-self: center;
-            margin-top: 1%;
-        }
-        #containerInfo{
-            display:flex;
-            justify-content: center;
-        }
-         #imgAnimale{
-            width: 40%;
-            align-self: center;
-         }
-    </style>
     <body>
         <div class="card text-center">
             <div class="card-header">
@@ -62,31 +45,8 @@
                     <p> Scegli tra le opzioni nel menù in alto!</p>
                 </div>
             </div>
-            <img id="imgAnimale" src="saluto.gif" class="img-thumbnail">
+            <img id="imgAnimale" src="immagini/saluto.gif" class="img-thumbnail">
         </div>
     </body>
-    <script>
-        console.log(document.cookie);
-        var test=document.cookie;
-        console.log(test);
-        if(document.cookie){
-
-            if(document.cookie=="null"){
-                document.getElementById("login").style.display="block";
-                document.getElementById("areaPersonale").style.display="none";
-            }
-            else {
-                document.getElementById("login").style.display="none";
-                document.getElementById("areaPersonale").style.display="block";
-            }
-        }
-        else{
-            document.getElementById("login").style.display="block";
-            document.getElementById("areaPersonale").style.display="none";
-        }
-
-        /*document.getElementById("login").style.display="block";
-        document.getElementById("areaPersonale").style.display="block";*/
-
-    </script>
+    <script src="script/showLogin.js"></script>
 </html>

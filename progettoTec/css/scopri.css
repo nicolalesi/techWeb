@@ -1,0 +1,26 @@
+#container{
+    display: flex;
+    flex-direction: column;
+ }
+ #titolo{
+    align-self: center;
+ }
+ #containerInfo{
+    display:flex;
+    justify-content: center;
+ }
+ #imgAnimale{
+    width: 30vw;
+    height: 50vh;
+    margin-left: 40px;
+ }
+ p{
+    font-size: 15px;
+    font-family: 'Courier New', Courier, monospace;
+ }
+ #imgAnimale{
+    display: none;
+ }
+ #button{
+    height: 20%;
+ }

@@ -22,8 +22,19 @@
       "password": "Ciaoatutti",
       "nome": "Nicol",
       "cognome": "Alesi",
-      "punteggio": 10,
+      "punteggio": 12,
       "id": "FltHxTM"
+    },
+    {
+      "email": "alessandrolaerakallon0@gmail.com",
+      "id": "mjKfcz8",
+      "nome": "Ale",
+      "cognome": "Ale",
+      "punteggio": 0,
+      "password": "12345",
+      "preferiti": [
+        2
+      ]
     }
   ],
   "bacheca": [
@@ -231,6 +242,12 @@
       "messaggio": "Ciao volevo propormi",
       "destinatario": "gionny@stecchino.it",
       "id": 33
+    },
+    {
+      "mittente": "alessandrolaerakallon0@gmail.com",
+      "messaggio": "ciao ciao",
+      "destinatario": "nicol@alesi.it",
+      "id": 34
     }
   ]
 }

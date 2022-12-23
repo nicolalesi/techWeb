@@ -14,7 +14,7 @@ head += "<li class='nav-item' id='bacheca'><a class='nav-link' href='bacheca.htm
 head += "</ul></div></div>";  
 
 footer = "<footer class='bg-light text-center text-lg-start' >"
-footer += "<div class='text-center p-3' style='background-color: rgba(0, 0, 0, 0.2); position: fixed; width: 100%;'>";
+footer += "<div class='text-center p-3' style='background-color: rgba(0, 0, 0, 0.2); position: fixed; width: 100%; bottom:0px;'>";
 footer += "&copy; 2020 Copyright:";
 footer += "<a class='text-dark' href='https://mdbootstrap.com/'>AnimalHouse.com</a>";
 footer += "</div></footer>";

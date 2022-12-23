@@ -2,43 +2,16 @@
     <head> 
         <title> Info sugli animali </title>
         <link rel="stylesheet" href="css/scopri.css">
+        <script language="javaScript" src="./script/fontPage.js"></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <title> Info sugli animali </title>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     </head>
     <body>
-        <div class="card text-center">
-            <div class="card-header ">
-                <h3> Animal house</h3>
-                <ul class="nav nav-tabs card-header-tabs" id="navbar">
-                    <li class="nav-item">
-                        <a class="nav-link" href="home.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link active" href="scopri.html">Scopri nuovi animali</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="quiz.html">Quiz</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="curiosita.html">Curiosit&aacute; </a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="funFacts.html" tabindex="-1" aria-disabled="true">Funny and cutie images</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="login.html" tabindex="-1" aria-disabled="true" id="login">Login</a>
-                    </li>
-                    <li class="nav-item" id="areaPersonale">
-                    <a class="nav-link" href="areaPersonale.html" tabindex="-1" aria-disabled="true" id="areaPersonale">Area personale</a>
-                    </li>
-                    <li class="nav-item" id="bacheca">
-                    <a class="nav-link" href="bacheca.html" tabindex="-1" aria-disabled="true">Bacheca</a>    
-                    </li>
-                </ul>
-            </div>    
-        </div>
+        <script language="javaScript">
+            document.write(head);
+        </script>
         <div id="container">
             <div id="containerInfo" class="mt-5">
                 <div id="informazioni">
@@ -46,7 +19,10 @@
                 <img id="imgAnimale" class="img-thumbnail">
                 <input type="button" onclick="refresh()" value="Nuovo animale" class="btn btn-primary" id="button"/>
             </div>
-        </div>    
+        </div>
+        <script language="javaScript">
+            document.write(footer);
+        </script>    
     </body>
 </html>
 <script src="script/showLogin.js"></script>

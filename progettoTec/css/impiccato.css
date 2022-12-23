@@ -1,0 +1,92 @@
+body {
+	margin: 35px 10px;
+	text-align: center;
+	font: 16px sans-serif;
+}
+
+/*div { margin: auto }*/
+
+#word {
+	margin-bottom: 30px;
+	text-transform: uppercase;
+	font-size: 24px;
+}
+
+#word span { text-decoration: underline }
+
+#keyboard {
+	border: 1px solid #ccc;
+	padding: 1px;
+	width: 288px !important; height: 96px !important;
+	width: 292px; height: 100px;
+}
+
+#keyboard a, #keyboard span {
+	float: left;
+	margin: 1px;
+	border: 1px solid #03f;
+	width: 28px !important; height: 28px !important;
+	width: 30px; height: 30px;
+	background: #cdf;
+	color: #03f;
+	text-decoration: none;
+	line-height: 24px;
+}
+
+#keyboard a:hover {
+	border-color: #09f;
+	background: #fff;
+	color: #06f;
+	font-weight: bold;
+	font-size: larger;
+}
+
+#keyboard a:active {
+	border-color: gold;
+	background: #ffc;
+	color: orange;
+}
+
+/* BOX DELL'IMPICCATO, SENZA IMMAGINE DI SFONDO */
+#impiccato {
+	margin-bottom: 30px;
+	border: 1px solid #ccc;
+	width: 300px ; 
+    height: 400px ;
+	background-position: center center;
+    background-repeat: no-repeat;
+	background-color: #fff;
+}
+
+/* CLASSI APPLICABILI AL BOX PRECEDENTE, CON LE IMMAGINI DELLA SEQUENZA */
+.x0 { background-image: url('../immagini/hm1.gif'); }
+.x1 { background-image: url('../immagini/hm2.gif'); }
+.x2 { background-image: url('../immagini/hm3.gif'); }
+.x3 { background-image: url('../immagini/hm4.gif'); }
+.x4 { background-image: url('../immagini/hm5.gif'); }
+.x5 { background-image: url('../immagini/hm6.gif'); }
+.x6 { background-image: url('../immagini/hm7.gif'); }
+.x7 { background-image: url('../immagini/hm8.gif'); }
+.x8 { background-image: url('../immagini/hm9.gif'); }
+.x9 { background-image: url('../immagini/hm10.gif');}
+
+/* PULSANTE INATTIVO DEL BOX TASTIERA (GRIGIO) */
+#keyboard span {
+	border-color: #999;
+	background: #eee;
+	color: #999;
+}
+
+/* PULSANTE INATTIVO CON LETTERA GIUSTA (VERDE) */
+#keyboard span.ok {
+	border-color: #6f6;
+	background: #efe;
+	color: #6f6;
+}
+
+/* PULSANTE INATTIVO CON LETTERA ERRATA (ROSSO) */
+#keyboard span.ko {
+	border-color: #f99;
+	background: #fee;
+	color: #f99;
+}

@@ -1,7 +1,14 @@
 body {
-	margin: 35px 10px;
 	text-align: center;
 	font: 16px sans-serif;
+}
+
+#container{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+	padding: 40px;
 }
 
 /*div { margin: auto }*/

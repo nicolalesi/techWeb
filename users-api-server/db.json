@@ -35,6 +35,15 @@
       "preferiti": [
         2
       ]
+    },
+    {
+      "email": "alessandro@alessandro.it",
+      "id": "0i9ZDMd",
+      "password": "123456",
+      "nome": "ale",
+      "cognome": "ale",
+      "punteggio": 0,
+      "preferiti": []
     }
   ],
   "bacheca": [

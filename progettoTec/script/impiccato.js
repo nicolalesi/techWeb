@@ -88,8 +88,64 @@ function check_endgame () {
     alert ("Yeah, hai vinto!");
     alert ("La parola misteriosa \u00E8:\n\t" + word.toUpperCase ());
     // SOMETHING ON-WIN
+    
   }
 }
+
+var settings = {
+  "url": "http://localhost:3000/utenti/",
+  "method": "GET",
+  "timeout": 0,
+};
+
+$.ajax(settings).done(function (response) {
+
+  infoResponse=response;
+  console.log(infoResponse);
+
+  var div=document.getElementById("leaderBoard");
+  var divPunteggio= document.createElement("table");
+  divPunteggio.classList.add("table");
+  divPunteggio.classList.add("table-primary");
+
+  var primaRiga=document.createElement("tr");
+  var email=document.createElement("th");
+  var punteggio=document.createElement("th");
+
+  email.innerHTML="Email ";
+  punteggio.innerHTML="Punteggio ";
+
+  primaRiga.appendChild(email);
+  primaRiga.appendChild(punteggio);
+  divPunteggio.appendChild(primaRiga);
+
+
+  for(let i=0;i<infoResponse.length;i++){
+      var email=infoResponse[i].email;
+      var punteggio=infoResponse[i].punteggio;
+      var arrayUtenti=[];
+
+      if(punteggio!=undefined){
+          var riga=document.createElement("tr");
+          
+          var pEmail=document.createElement("td");
+          var pPunteggio=document.createElement("td");
+
+          pEmail.innerHTML=email;
+          pPunteggio.innerHTML=punteggio;
+
+          riga.appendChild(pEmail);
+          riga.appendChild(pPunteggio);
+
+          divPunteggio.appendChild(riga);
+
+          div.appendChild(divPunteggio);
+      }
+  }
+
+  console.log(arrayUtenti);
+
+  });
 
 function reset() {
     window.location.reload();

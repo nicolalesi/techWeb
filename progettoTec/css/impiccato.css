@@ -11,6 +11,10 @@ body {
 	padding: 40px;
 }
 
+#leaderboard{
+    margin-right: 30px;
+ }
+
 /*div { margin: auto }*/
 
 #word {

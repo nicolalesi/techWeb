@@ -18,6 +18,7 @@
    #containerInfo{
       display: flex;
       flex-direction: column;
+      
    }
    #imgAnimale{
       width: 100%;
@@ -26,4 +27,5 @@
    #buttonDiv{
       margin-bottom: 10px;
    }
+
  }

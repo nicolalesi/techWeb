@@ -88,7 +88,47 @@ function check_endgame () {
     alert ("Yeah, hai vinto!");
     alert ("La parola misteriosa \u00E8:\n\t" + word.toUpperCase ());
     // SOMETHING ON-WIN
-    
+    var settings = {
+      "url": "http://localhost:3000/utenti/"+document.cookie,
+      "method": "GET",
+      "timeout": 0,
+      };
+
+      $.ajax(settings).done(function (response) {
+
+      infoResponse=response;
+      console.log(infoResponse);
+      console.log(infoResponse.punteggio+ "Punteggio");
+
+      punteggio=infoResponse.punteggio+1;
+
+
+      console.log("Aggiorno il punteggio di "+document.cookie);
+      var settings = {
+      "url": "http://localhost:3000/utenti/"+document.cookie,
+      "method": "PUT",
+      "timeout": 0,
+      "headers": {
+      "Content-Type": "application/json"
+      },
+      "data": JSON.stringify({
+      "email": infoResponse.email,
+      "password": infoResponse.password,
+      "nome": infoResponse.nome,
+      "cognome":infoResponse.cognome,
+      "punteggio":punteggio,
+      "preferiti":infoResponse.preferiti
+      }),
+
+      
+};
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+  window.location.reload();
+});
+
+      });
   }
 }
 

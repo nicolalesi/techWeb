@@ -11,8 +11,13 @@ body {
 	padding: 40px;
 }
 
+#primaRiga{
+	display: flex;
+	flex-direction: row;
+}
+
 #leaderboard{
-    margin-right: 30px;
+	flex: 50%;
  }
 
 /*div { margin: auto }*/
@@ -60,6 +65,7 @@ body {
 
 /* BOX DELL'IMPICCATO, SENZA IMMAGINE DI SFONDO */
 #impiccato {
+	flex: 50%;
 	margin-bottom: 30px;
 	border: 1px solid #ccc;
 	width: 300px ; 
@@ -67,6 +73,7 @@ body {
 	background-position: center center;
     background-repeat: no-repeat;
 	background-color: #fff;
+	margin-right: 20px;
 }
 
 /* CLASSI APPLICABILI AL BOX PRECEDENTE, CON LE IMMAGINI DELLA SEQUENZA */

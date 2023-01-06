@@ -10,7 +10,7 @@ head += "<li class='nav-item'><a class='nav-link' href='curiosita.html' id='curi
 head += "<li class='nav-item'><a class='nav-link' href='funFacts.html' tabindex='-1' aria-disabled='true' id='funFacts'>Funny and cutie images</a></li>";        
 head += "<li class='nav-item' id='login'><a class='nav-link' href='login.html' tabindex='-1' aria-disabled='true' id='login' >Login</a></li>";        
 head += "<li class='nav-item' id='areaPersonale'><a class='nav-link' href='areaPersonale.html' tabindex='-1' aria-disabled='true' id='personal'>Area personale</a></li>";        
-head += "<li class='nav-item' id='bacheca'><a class='nav-link' href='bacheca.html' tabindex='-1' aria-disabled='true' id='bacheca'>Bacheca</a></li>";        
+head += "<li class='nav-item' id='bacheca'><a class='nav-link' href='bacheca.html' tabindex='-1' aria-disabled='true' id='bachecaLista'>Bacheca</a></li>";        
 head += "</ul></div></div>";  
 
 footer = "<footer class='bg-light text-center text-lg-start' >"

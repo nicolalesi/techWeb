@@ -5,7 +5,7 @@ head += "<ul class='nav nav-tabs card-header-tabs' id='navbar'>";
 head += "<li class='nav-item'><a class='nav-link' href='home.html' id='home'>Home</a></li>";  
 head += "<li class='nav-item'><a class='nav-link' href='scopri.html' id='scopri'>Scopri nuovi animali</a></li>";    
 head += "<li class='nav-item'><a class='nav-link' href='quiz.html' id='quiz'>Quiz</a></li>";        
-head += "<li class='nav-item'><a class='nav-link' href='impiccato.html' id='impiccato'>Impiccato</a></li>";        
+head += "<li class='nav-item'><a class='nav-link' href='impiccato.html' id='impiccatoLista'>Impiccato</a></li>";        
 head += "<li class='nav-item'><a class='nav-link' href='curiosita.html' id='curiosit' >Curiosit&agrave;</a></li>";        
 head += "<li class='nav-item'><a class='nav-link' href='funFacts.html' tabindex='-1' aria-disabled='true' id='funFacts'>Funny and cutie images</a></li>";        
 head += "<li class='nav-item' id='login'><a class='nav-link' href='login.html' tabindex='-1' aria-disabled='true' id='login' >Login</a></li>";        

@@ -177,8 +177,11 @@ var settings = {
     primaRiga.appendChild(punteggio);
     divPunteggio.appendChild(primaRiga);
 
+    infoResponse.sort(maggiore);
+    console.log(infoResponse);
 
     for(let i=0;i<infoResponse.length;i++){
+    
         var email=infoResponse[i].email;
         var punteggio=infoResponse[i].punteggio;
         var arrayUtenti=[];
@@ -204,3 +207,13 @@ var settings = {
     console.log(arrayUtenti);
 
     });
+
+    function maggiore(a,b) {
+        if (a.punteggio < b.punteggio){
+          return 1;
+        }
+        else if (a.punteggio > b.punteggio){
+          return -1;
+        }
+        return 0;
+      }

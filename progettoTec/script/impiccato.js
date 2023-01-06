@@ -159,6 +159,8 @@ $.ajax(settings).done(function (response) {
   primaRiga.appendChild(punteggio);
   divPunteggio.appendChild(primaRiga);
 
+  infoResponse.sort(maggiore);
+  console.log(infoResponse);
 
   for(let i=0;i<infoResponse.length;i++){
       var email=infoResponse[i].email;
@@ -189,4 +191,14 @@ $.ajax(settings).done(function (response) {
 
 function reset() {
     window.location.reload();
+}
+
+function maggiore(a,b) {
+  if (a.punteggio < b.punteggio){
+    return 1;
+  }
+  else if (a.punteggio > b.punteggio){
+    return -1;
+  }
+  return 0;
 }
